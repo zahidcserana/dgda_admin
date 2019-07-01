@@ -54,7 +54,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Customer List
+                    Order List
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -66,9 +66,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('customers')}}" class="m-nav__link">
+                        <a href="{{route('orders')}}" class="m-nav__link">
 											<span class="m-nav__link-text">
-												Customers
+												Orders
 											</span>
                         </a>
                     </li>
@@ -161,11 +161,11 @@
                         <div class="m-portlet__head-caption">
                             <div style="float: left" class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Customer List
+                                    Order List
                                 </h3>
                             </div>
                             <div style="float: right;padding-top: 1%;">
-                                <a class="btn btn-primary" href="{{route('customer_form')}}">Add New</a>
+{{--                                <a class="btn btn-primary" href="{{route('customer_form')}}">Add New</a>--}}
                             </div>
                         </div>
                     </div>
