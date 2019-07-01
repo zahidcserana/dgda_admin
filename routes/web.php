@@ -39,9 +39,16 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', 'HomeController@index')->name('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/** Orders */
+Route::get('/orders', 'OrderController@index')->name('orders');
+Route::get('/orders/list', 'OrderController@orderList')->name('order_list');
+Route::get('/orders/{id}', 'OrderController@view')->name('order_view');
+Route::get('/orders/{id}/details', 'OrderController@details')->name('order_details');
+Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit');
+Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete');
+
 /*Customers*/
 Route::get('/customers', 'CustomersController@index')->name('customers');
-Route::get('/orders', 'CustomersController@index')->name('orders');
 Route::get('/customers/list', 'CustomersController@customersList')->name('customer_list');
 Route::get('/customer-form', 'CustomersController@form')->name('customer_form');
 Route::post('/customers', 'CustomersController@add')->name('add_customer');

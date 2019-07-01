@@ -2,7 +2,7 @@
 @section('include_js')
     @parent
     <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/data-order.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/data-customer.js') }}" type="text/javascript"></script>
 
     <style>
         .dropbtn {

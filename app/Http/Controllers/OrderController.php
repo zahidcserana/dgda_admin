@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Order;
 use Illuminate\Http\Request;
-use App\Model\Customer;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
 use Input;
@@ -12,8 +13,125 @@ use Image;
 use Uuid;
 use Session;
 
-class CustomersController extends Controller
+class OrderController extends Controller
 {
+    /**
+     * order List
+     */
+    public function index()
+    {
+        $data = array();
+        $data['title'] = 'Order';
+
+        return view('customers.index', $data);
+    }
+
+    /**
+     * Ajax request for listing
+     * @param Request $request
+     */
+    public function orderList(Request $request)
+    {
+        $user = Auth::user();
+        $query = $request->query('query');
+
+        $conditions = array();
+
+        if (isset($query['invoice']) && !empty($query['invoice'])) {
+            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
+        }
+        if (isset($query['status']) && !empty($query['status'])) {
+            $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
+        }
+        if (isset($query['mobile']) && !empty($query['mobile'])) {
+            $conditions = array_merge(array(['mobile', 'LIKE', '%' . $query['mobile'] . '%']), $conditions);
+        }
+        if (isset($query['id']) && !empty($query['id'])) {
+            $conditions = array_merge(array('id' => $query['id']), $conditions);
+        }
+        $customers = DB::table('orders')->where($conditions)->orderBy('id', 'desc')->get();
+
+        foreach ($customers as $customer) {
+            $customer->order_id = '<a href="/orders/' . $customer->id . '">' . $customer->id . '</a>';
+            $customerId = $customer->id;
+            if ($user->user_type == 'DGDA') {
+                $customer->actions = '
+               <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                   Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                 <li><a href="/orders/' . $customerId . '/details">Details</a></li>
+                  </ul>
+                </div>
+					';
+            } else {
+                $customer->actions = '
+               <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                   Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="/orders/' . $customerId . '">Process</a></li>
+                    <li><a onclick="return confirm(\'Are you sure?\')" href="/orders/' . $customerId . '/delete">Delete</a></li>
+                  </ul>
+                </div>
+					';
+            }
+
+        }
+        $data['customers'] = $customers;
+
+        echo json_encode($customers);
+    }
+
+    /**
+     * Order view
+     * @param $id
+     * @return order
+     */
+    public function view($id)
+    {
+        $orderModel = new Order();
+
+        $order = $orderModel::findOrFail($id);
+        if (empty($order)) {
+            return redirect()->route('orders');
+        }
+        $order = $orderModel->getOrderDetails($id);
+        $data['order'] = $order;
+        return view('orders.view', $data);
+    }
+
+    /**
+     * Order view
+     * @param $id
+     * @return order
+     */
+    public function details($id)
+    {
+        $orderModel = new Order();
+
+        $order = $orderModel::findOrFail($id);
+        if (empty($order)) {
+            return redirect()->route('orders');
+        }
+        $order = $orderModel->getOrderDetails($id);
+        $data['order'] = $order;
+        return view('orders.view', $data);
+    }
+
+    /**
+     * Delete a order
+     */
+    public function delete($id)
+    {
+        DB::table('orders')->where('id', $id)->delete();
+        DB::table('order_items')->where('order_id', $id)->delete();
+        return redirect()->route('orders');
+    }
+
+    /** *** *** *** */
 
     /*
      * Customer Form
@@ -46,74 +164,12 @@ class CustomersController extends Controller
     }
 
     /*
-     * customer List
-     */
-    public function index()
-    {
-        $data = array();
-        $data['title'] = 'Order';
-
-        return view('customers.index', $data);
-    }
-
-    /*
-     * Ajax request for listing
-     */
-    public function customersList(Request $request)
-    {
-        $query = $request->query('query');
-
-        $conditions = array();
-        if (isset($query['invoice']) && !empty($query['invoice'])) {
-            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
-        }
-        if (isset($query['status']) && !empty($query['status'])) {
-            $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
-        }
-        if (isset($query['mobile']) && !empty($query['mobile'])) {
-            $conditions = array_merge(array(['mobile', 'LIKE', '%' . $query['mobile'] . '%']), $conditions);
-        }
-        if (isset($query['id']) && !empty($query['id'])) {
-            $conditions = array_merge(array('id' => $query['id']), $conditions);
-        }
-        $customers = DB::table('orders')->where($conditions)->orderBy('id', 'desc')->get();
-        foreach ($customers as $customer) {
-            $customer->order_id = '<a href="/orders/' . $customer->id . '">' . $customer->id . '</a>';
-            $customerId = $customer->id;
-            $customer->actions = '
-               <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
-                   Action <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a href="/orders/' . $customerId . '">Process</a></li>
-                    <li><a onclick="return confirm(\'Are you sure?\')" href="/orders/' . $customerId . '/delete">Delete</a></li>
-                  </ul>
-                </div>
-					';
-        }
-        $data['customers'] = $customers;
-
-        echo json_encode($customers);
-    }
-
-    /*
-     * View Customer
-     */
-    public function view($id)
-    {
-        $customer = DB::table('customers')->where('id', $id)->first();
-        $data['customer'] = $customer;
-        if (empty($customer))
-            return redirect()->route('customers');
-        return view('customers.view', $data);
-    }
-
-    /*
      * Edit Customer
      */
     public function edit($id, Request $request)
     {
+        return redirect()->route('orders');
+
         $data = $request->except('_token');
         $rules = [
             'name' => 'required|string|max:100',
@@ -126,15 +182,6 @@ class CustomersController extends Controller
                 ->withInput($request->input());
         }
         DB::table('customers')->where('id', $id)->update($data);
-        return redirect()->route('customers');
-    }
-
-    /*
-     * Delete a customer
-     */
-    public function delete($id)
-    {
-        DB::table('customers')->where('id', $id)->delete();
         return redirect()->route('customers');
     }
 
