@@ -82,7 +82,8 @@ var DatatableRemoteAjaxDemo = function () {
                             'ACCEPTED': {'title': 'ACCEPTED', 'class': 'm-badge--brand'},
                             'REJECTED': {'title': 'REJECTED', 'class': 'm-badge  m-badge--danger m-badge--wide'},
                             'PENDING': {'title': 'PENDING', 'class': 'm-badge--brand'},
-                            'HOLD': {'title': 'HOLD', 'class': 'm-badge  m-badge--metal m-badge--wide'},
+                            'IN-PROGRESS': {'title': 'IN-PROGRESS', 'class': 'm-badge  m-badge--metal m-badge--wide'},
+                            'DELIVERED': {'title': 'DELIVERED', 'class': 'm-badge  m-badge--metal m-badge--wide'},
                         };
                         return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
                     },
