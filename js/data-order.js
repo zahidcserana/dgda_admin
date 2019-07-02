@@ -83,7 +83,6 @@ var DatatableRemoteAjaxDemo = function () {
                             'REJECTED': {'title': 'REJECTED', 'class': 'm-badge  m-badge--danger m-badge--wide'},
                             'PENDING': {'title': 'PENDING', 'class': 'm-badge--brand'},
                             'HOLD': {'title': 'HOLD', 'class': 'm-badge  m-badge--metal m-badge--wide'},
-                            'COMPLETE': {'title': 'COMPLETE', 'class': 'm-badge--success'},
                         };
                         return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
                     },

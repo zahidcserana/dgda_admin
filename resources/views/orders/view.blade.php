@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('include_js')
     @parent
+
 @endsection
 
 @section('content')

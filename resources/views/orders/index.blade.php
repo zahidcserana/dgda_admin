@@ -2,7 +2,7 @@
 @section('include_js')
     @parent
     <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/data-customer.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/data-order.js') }}" type="text/javascript"></script>
 
     <style>
         .dropbtn {
@@ -76,9 +76,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('add_customer')}}" class="m-nav__link">
+                        <a href="{{route('orders')}}" class="m-nav__link">
 											<span class="m-nav__link-text">
-												New
+												Back
 											</span>
                         </a>
                     </li>
