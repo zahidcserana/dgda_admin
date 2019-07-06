@@ -85,9 +85,8 @@ var DatatableRemoteAjaxDemo = function () {
                 }, {
                     field: 'exp_date',
                     title: 'EXP Date',
-                    type: 'date',
-                    format: 'MM/DD/YYYY',
-                }, {
+
+                },{
                     field: 'status',
                     title: 'Status',
                     // callback function support for column rendering
