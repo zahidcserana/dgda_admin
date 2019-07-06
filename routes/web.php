@@ -41,7 +41,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /** Orders */
 Route::get('/orders', 'OrderController@index')->name('orders');
-Route::get('/orders/list', 'OrderController@orderList')->name('order_list');
+Route::get('/orders/list', 'OrderController@orderList')->name('order_list');   // ajax
+Route::get('/orders/items', 'OrderController@orderItems')->name('order_items');
+Route::get('/orders/item-list', 'OrderController@itemList')->name('item_list'); // ajax
 Route::get('/orders/{id}', 'OrderController@view')->name('order_view');
 Route::get('/orders/{id}/details', 'OrderController@details')->name('order_details');
 Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit');

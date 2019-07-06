@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -81,11 +81,13 @@ class Order extends Model
 
     public function items()
     {
-        return $this->hasMany('App\Model\OrderItem');
+        return $this->hasMany('App\Models\OrderItem');
     }
 
     public function PharmacyBranch()
     {
-        return $this->belongsTo('App\Model\PharmacyBranch');
+        return $this->belongsTo('App\Models\PharmacyBranch');
     }
+
+
 }

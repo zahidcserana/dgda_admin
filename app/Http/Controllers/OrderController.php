@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -82,6 +82,75 @@ class OrderController extends Controller
 
         }
         $data['orders'] = $orders;
+
+        echo json_encode($orders);
+    }
+
+    public function orderItems()
+    {
+        $data = array();
+        $data['title'] = 'Order';
+
+        return view('orders.item_list', $data);
+    }
+    public function _getItemList($where)
+    {
+        $query = Order::where($where);
+        $orders = $query
+//            ->orderBy('id', 'desc')
+            ->get();
+        $orderData = array();
+        foreach ($orders as $order) {
+            $items = $order->items()->get();
+            foreach ($items as $item) {
+                $aData = array();
+                $aData['id'] = $item->id;
+                $aData['order_id'] = $item->order_id;
+
+                $company = $item->company;
+                $aData['company'] = $company->company_name;
+
+                $aData['invoice'] = $order->invoice;
+
+                $medicine = $item->medicine;
+                $aData['medicine'] = $medicine->brand_name;
+
+                $aData['exp_date'] = $item->exp_date;
+                $aData['mfg_date'] = $item->mfg_date;
+                $aData['batch_no'] = $item->batch_no;
+                $aData['quantity'] = $item->quantity;
+                $aData['status'] = $item->status;
+
+                $orderData[] = $aData;
+            }
+
+        }
+
+        return $orderData;
+    }
+
+    public function itemList(Request $request)
+    {
+        $user = Auth::user();
+        $userType = $user->user_type ?? 'DGDA';
+        $query = $request->query('query');
+
+        $conditions = array();
+
+        if (isset($query['invoice']) && !empty($query['invoice'])) {
+            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
+        }
+        if (isset($query['status']) && !empty($query['status'])) {
+            $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
+        }
+        if (isset($query['mobile']) && !empty($query['mobile'])) {
+            $conditions = array_merge(array(['mobile', 'LIKE', '%' . $query['mobile'] . '%']), $conditions);
+        }
+        if (isset($query['id']) && !empty($query['id'])) {
+            $conditions = array_merge(array('id' => $query['id']), $conditions);
+        }
+
+        $orders = $this->_getItemList($conditions);
 
         echo json_encode($orders);
     }

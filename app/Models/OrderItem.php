@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +38,11 @@ class OrderItem extends Model
 
     public function medicine()
     {
-        return $this->belongsTo('App\Model\Medicine');
+        return $this->belongsTo('App\Models\Medicine');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\MedicineCompany');
     }
 }
