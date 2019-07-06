@@ -979,10 +979,10 @@ $routeName = Route::getCurrentRoute()->getName();
                                                     </div>
                                                     <div class="m-card-user__details">
 																<span class="m-card-user__name m--font-weight-500">
-																	Lisa Strong
+																	{{\Illuminate\Support\Facades\Auth::user()->name}}
 																</span>
                                                         <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                                                            lisa.strong@gmail.com
+                                                            {{\Illuminate\Support\Facades\Auth::user()->email}}
                                                         </a>
                                                     </div>
                                                 </div>

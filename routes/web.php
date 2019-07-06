@@ -39,26 +39,16 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', 'HomeController@index')->name('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
-/*Customers*/
-Route::get('/customers', 'CustomersController@index')->name('customers');
-Route::get('/orders', 'CustomersController@index')->name('orders');
-Route::get('/customers/list', 'CustomersController@customersList')->name('customer_list');
-Route::get('/customer-form', 'CustomersController@form')->name('customer_form');
-Route::post('/customers', 'CustomersController@add')->name('add_customer');
-Route::get('/customers/{id}', 'CustomersController@view')->name('customer_edit');
-Route::post('/customers/{id}', 'CustomersController@edit')->name('customer_edit');
-Route::post('/customer-image', 'CustomersController@customerImage')->name('customer_image');
-Route::get('/customers/{id}/delete', 'CustomersController@delete')->name('customer_delete');
+/** Orders */
+Route::get('/orders', 'OrderController@index')->name('orders');
+Route::get('/orders/list', 'OrderController@orderList')->name('order_list');   // ajax
+Route::get('/orders/items', 'OrderController@orderItems')->name('order_items');
+Route::get('/orders/item-list', 'OrderController@itemList')->name('item_list'); // ajax
+Route::get('/orders/{id}', 'OrderController@view')->name('order_view');
+Route::get('/orders/{id}/details', 'OrderController@details')->name('order_details');
+Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit');
+Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete');
 
-/* Accounts */
-Route::get('/accounts', 'AccountsController@index')->name('accounts');
-Route::post('/accounts', 'AccountsController@add')->name('add_account');
-Route::get('/accounts/list', 'AccountsController@accountsList')->name('account_list');
-Route::get('/account-form', 'AccountsController@form')->name('account_form');
-Route::get('/accounts/{id}', 'AccountsController@view')->name('account_edit');
-Route::post('/accounts/{id}', 'AccountsController@edit')->name('account_edit');
-Route::get('/accounts/{id}/delete', 'AccountsController@delete')->name('account_delete');
-Route::get('/download-pdf', 'AccountsController@downloadPDF');
 
 /* Users */
 Route::get('/users/{id?}', 'UsersController@index')->name('users');

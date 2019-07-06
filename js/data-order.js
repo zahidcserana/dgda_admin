@@ -10,7 +10,7 @@ var DatatableRemoteAjaxDemo = function () {
                     read: {
                         // sample GET method
                         method: 'GET',
-                        url: "/customers/list",
+                        url: "/orders/list",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -79,9 +79,11 @@ var DatatableRemoteAjaxDemo = function () {
                     // callback function support for column rendering
                     template: function (row) {
                         var status = {
+                            'ACCEPTED': {'title': 'ACCEPTED', 'class': 'm-badge--brand'},
+                            'REJECTED': {'title': 'REJECTED', 'class': 'm-badge  m-badge--danger m-badge--wide'},
                             'PENDING': {'title': 'PENDING', 'class': 'm-badge--brand'},
-                            'HOLD': {'title': 'HOLD', 'class': 'm-badge--brand'},
-                            'COMPLETE': {'title': 'COMPLETE', 'class': ' m-badge--success'},
+                            'IN-PROGRESS': {'title': 'IN-PROGRESS', 'class': 'm-badge  m-badge--metal m-badge--wide'},
+                            'DELIVERED': {'title': 'DELIVERED', 'class': 'm-badge  m-badge--metal m-badge--wide'},
                         };
                         return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
                     },

@@ -10,7 +10,7 @@ var DatatableRemoteAjaxDemo = function () {
                     read: {
                         // sample GET method
                         method: 'GET',
-                        url: "/customers/list",
+                        url: "/orders/item-list",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -63,14 +63,28 @@ var DatatableRemoteAjaxDemo = function () {
                     selector: false,
                     textAlign: 'center',
                 }, {
-                    field: 'order_id',
-                    title: 'ID',
-                }, {
                     field: 'invoice',
                     title: 'Invoice',
                 }, {
-                    field: 'created_at',
-                    title: 'Created',
+                    field: 'medicine',
+                    title: 'Medicine',
+                }, {
+                    field: 'company',
+                    title: 'Company',
+                }, {
+                    field: 'batch_no',
+                    title: 'Batch No',
+                }, {
+                    field: 'quantity',
+                    title: 'Quantity',
+                }, {
+                    field: 'mfg_date',
+                    title: 'MFG Date',
+                    type: 'date',
+                    format: 'MM/DD/YYYY',
+                }, {
+                    field: 'exp_date',
+                    title: 'EXP Date',
                     type: 'date',
                     format: 'MM/DD/YYYY',
                 }, {
@@ -79,16 +93,14 @@ var DatatableRemoteAjaxDemo = function () {
                     // callback function support for column rendering
                     template: function (row) {
                         var status = {
-                            'PENDING': {'title': 'PENDING', 'class': 'm-badge--brand'},
-                            'HOLD': {'title': 'HOLD', 'class': 'm-badge--brand'},
-                            'COMPLETE': {'title': 'COMPLETE', 'class': ' m-badge--success'},
+                            'RETURNED': {'title': 'RETURNED', 'class': 'm-badge--brand'},
+                            'SOLD': {'title': 'SOLD', 'class': 'm-badge  m-badge--danger m-badge--wide'},
+                            'REMOVED': {'title': 'REMOVED', 'class': 'm-badge--brand'},
+                            'OK': {'title': 'OK', 'class': 'm-badge  m-badge--metal m-badge--wide'},
                         };
                         return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
                     },
-                }, {
-                    field: 'actions',
-                    title: 'Actions',
-                }
+                },
             ],
         });
 

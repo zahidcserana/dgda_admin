@@ -2,7 +2,7 @@
 @section('include_js')
     @parent
     <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/data-customer.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/data-order-item.js') }}" type="text/javascript"></script>
 
     <style>
         .dropbtn {
@@ -76,9 +76,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{route('add_customer')}}" class="m-nav__link">
+                        <a href="{{route('orders')}}" class="m-nav__link">
 											<span class="m-nav__link-text">
-												New
+												Back
 											</span>
                         </a>
                     </li>
@@ -165,7 +165,7 @@
                                 </h3>
                             </div>
                             <div style="float: right;padding-top: 1%;">
-{{--                                <a class="btn btn-primary" href="{{route('customer_form')}}">Add New</a>--}}
+                                {{--                                <a class="btn btn-primary" href="{{route('customer_form')}}">Add New</a>--}}
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                                             <div class="m-form__group m-form__group--inline">
                                                 <div class="m-form__control">
                                                     <input type="text" class="form-control m-input"
-                                                           placeholder="Name..." id="m_form_name">
+                                                           placeholder="ID..." id="m_form_id">
                                                 </div>
                                             </div>
                                             <div class="d-md-none m--margin-bottom-10"></div>
@@ -189,17 +189,7 @@
                                             <div class="m-form__group m-form__group--inline">
                                                 <div class="m-form__control">
                                                     <input type="text" class="form-control m-input"
-                                                           placeholder="Email..." id="m_form_email">
-                                                </div>
-                                            </div>
-                                            <div class="d-md-none m--margin-bottom-10"></div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="m-form__group m-form__group--inline">
-                                                <div class="m-form__control">
-                                                    <input type="text" class="form-control m-input"
-                                                           placeholder="Mobile..." id="m_form_mobile">
+                                                           placeholder="Invoice..." id="m_form_invoice">
                                                 </div>
                                             </div>
                                             <div class="d-md-none m--margin-bottom-10"></div>
@@ -217,14 +207,14 @@
                                                         <option value="">
                                                             All
                                                         </option>
-                                                        <option value="1">
-                                                            Active
+                                                        <option value="PENDING">
+                                                            PENDING
                                                         </option>
-                                                        <option value="2">
-                                                            Pending
+                                                        <option value="COMPLETE">
+                                                            COMPLETE
                                                         </option>
-                                                        <option value="3">
-                                                            Inactive
+                                                        <option value="HOLD">
+                                                            HOLD
                                                         </option>
                                                     </select>
                                                 </div>
