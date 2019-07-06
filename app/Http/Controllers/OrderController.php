@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medicine;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,7 +134,7 @@ class OrderController extends Controller
 
     private function _getExpStatus($date)
     {
-       // $date = "2019-05-20";
+        // $date = "2019-05-20";
         $today = date('Y-m-d');
         $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
         $exp2M = date('Y-m-d', strtotime("+2 months", strtotime(date('Y-m-d'))));
@@ -146,7 +147,7 @@ class OrderController extends Controller
             return '<span class="m-badge  m-badge--success m-badge--wide">' . $date . '</span>';
         } else if ($date > $exp1M) {
             return '<span class="m-badge  m-badge--warning m-badge--wide">' . $date . '</span>';
-        }else{
+        } else {
             return '<span class="m-badge  m-badge--metal m-badge--wide">' . $date . '</span>';
         }
     }
@@ -164,6 +165,11 @@ class OrderController extends Controller
         }
         if (isset($query['status']) && !empty($query['status'])) {
             $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
+        }
+        if (isset($query['medicine']) && !empty($query['medicine'])) {
+            $medicine = new Medicine();
+            $medicineData = $medicine->where('brand_name', 'like', $query['medicine'])->first();
+            $conditions = array_merge(array('medicine_id' => $medicineData->id), $conditions);
         }
         if (isset($query['mobile']) && !empty($query['mobile'])) {
             $conditions = array_merge(array(['mobile', 'LIKE', '%' . $query['mobile'] . '%']), $conditions);

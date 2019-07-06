@@ -179,7 +179,7 @@
                                             <div class="m-form__group m-form__group--inline">
                                                 <div class="m-form__control">
                                                     <input type="text" class="form-control m-input"
-                                                           placeholder="ID..." id="m_form_id">
+                                                           placeholder="Medicine..." id="m_form_medicine">
                                                 </div>
                                             </div>
                                             <div class="d-md-none m--margin-bottom-10"></div>
