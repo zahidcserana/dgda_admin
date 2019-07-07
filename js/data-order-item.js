@@ -85,8 +85,6 @@ var DatatableRemoteAjaxDemo = function () {
                 }, {
                     field: 'exp_date',
                     title: 'EXP Date',
-                    type: 'date',
-                    format: 'MM/DD/YYYY',
                 }, {
                     field: 'status',
                     title: 'Status',
@@ -110,6 +108,10 @@ var DatatableRemoteAjaxDemo = function () {
 
         $('#m_form_invoice').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'invoice');
+        });
+
+        $('#m_form_medicine').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'medicine');
         });
 
         $('#m_form_id').on('change', function () {
