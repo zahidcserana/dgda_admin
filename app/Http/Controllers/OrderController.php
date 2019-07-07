@@ -118,7 +118,7 @@ class OrderController extends Controller
                 $aData['medicine'] = $medicine->brand_name;
 
                 $aData['exp_date'] = $this->_getExpStatus($item->exp_date);
-                $aData['mfg_date'] = date("F Y", strtotime($item->mfg_date));;
+                $aData['mfg_date'] = date("F, Y", strtotime($item->mfg_date));;
                 $aData['batch_no'] = $item->batch_no;
                 $aData['quantity'] = $item->quantity;
                 $aData['status'] = $item->status;
@@ -133,7 +133,7 @@ class OrderController extends Controller
 
     private function _getExpStatus($date)
     {
-        $expDate = date("F Y", strtotime($date));
+        $expDate = date("F, Y", strtotime($date));
 
         $today = date('Y-m-d');
         $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
