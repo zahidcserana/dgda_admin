@@ -118,8 +118,7 @@ class OrderController extends Controller
                 $aData['medicine'] = $medicine->brand_name;
 
                 $aData['exp_date'] = $this->_getExpStatus($item->exp_date);
-                $aData['exp_status'] = $this->_getExpStatus($item->exp_date);
-                $aData['mfg_date'] = $item->mfg_date;
+                $aData['mfg_date'] = date("F Y", strtotime($item->mfg_date));;
                 $aData['batch_no'] = $item->batch_no;
                 $aData['quantity'] = $item->quantity;
                 $aData['status'] = $item->status;
@@ -134,21 +133,22 @@ class OrderController extends Controller
 
     private function _getExpStatus($date)
     {
-        // $date = "2019-05-20";
+        $expDate = date("F Y", strtotime($date));
+
         $today = date('Y-m-d');
         $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
         $exp2M = date('Y-m-d', strtotime("+2 months", strtotime(date('Y-m-d'))));
         $exp3M = date('Y-m-d', strtotime("+3 months", strtotime(date('Y-m-d'))));
         if ($date < $today) {
-            return '<span class="m-badge  m-badge--danger m-badge--wide.">' . $date . '</span>';
+            return '<span class="m-badge  m-badge--danger m-badge--wide.">' . $expDate . '</span>';
         } else if ($date > $exp3M) {
-            return '<span class="m-badge  m-badge--info m-badge--wide">' . $date . '</span>';
+            return '<span class="m-badge  m-badge--info m-badge--wide">' . $expDate . '</span>';
         } else if ($date > $exp2M) {
-            return '<span class="m-badge  m-badge--success m-badge--wide">' . $date . '</span>';
+            return '<span class="m-badge  m-badge--success m-badge--wide">' . $expDate . '</span>';
         } else if ($date > $exp1M) {
-            return '<span class="m-badge  m-badge--warning m-badge--wide">' . $date . '</span>';
+            return '<span class="m-badge  m-badge--warning m-badge--wide">' . $expDate . '</span>';
         } else {
-            return '<span class="m-badge  m-badge--metal m-badge--wide">' . $date . '</span>';
+            return '<span class="m-badge  m-badge--metal m-badge--wide">' . $expDate . '</span>';
         }
     }
 

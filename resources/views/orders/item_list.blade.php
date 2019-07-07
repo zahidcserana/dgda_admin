@@ -175,7 +175,7 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center">
-                                        <div class="col-md-2">
+                                        {{--<div class="col-md-2">
                                             <div class="m-form__group m-form__group--inline">
                                                 <div class="m-form__control">
                                                     <input type="text" class="form-control m-input"
@@ -183,7 +183,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-md-none m--margin-bottom-10"></div>
-                                        </div>
+                                        </div>--}}
 
                                         <div class="col-md-2">
                                             <div class="m-form__group m-form__group--inline">
@@ -195,7 +195,7 @@
                                             <div class="d-md-none m--margin-bottom-10"></div>
                                         </div>
 
-                                        <div class="col-md-2">
+                                        {{--<div class="col-md-2">
                                             <div class="m-form__group m-form__group--inline">
                                                 <div class="m-form__label">
                                                     <label>
@@ -220,7 +220,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-md-none m--margin-bottom-10"></div>
-                                        </div>
+                                        </div>--}}
 
                                         <div class="col-md-2">
                                             <button class="btn btn-info">Search</button>
