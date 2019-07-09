@@ -114,6 +114,9 @@ class OrderController extends Controller
 
                 $aData['invoice'] = $order->invoice;
 
+                $pharmacyBranch = $order->PharmacyBranch;
+                $aData['pharmacy_branch'] = $pharmacyBranch->branch_name;
+
                 $medicine = $item->medicine;
                 $aData['medicine'] = $medicine->brand_name;
 

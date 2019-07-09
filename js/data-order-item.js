@@ -63,6 +63,9 @@ var DatatableRemoteAjaxDemo = function () {
                     selector: false,
                     textAlign: 'center',
                 }, {
+                    field: 'pharmacy_branch',
+                    title: 'Pharmacy Branch',
+                }, {
                     field: 'invoice',
                     title: 'Invoice',
                 }, {
