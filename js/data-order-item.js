@@ -66,7 +66,7 @@ var DatatableRemoteAjaxDemo = function () {
                     field: 'pharmacy_branch',
                     title: 'Pharmacy Branch',
                 }, {
-                    field: 'invoice',
+                    field: 'company_invoice',
                     title: 'Invoice',
                 }, {
                     field: 'medicine',
@@ -109,8 +109,8 @@ var DatatableRemoteAjaxDemo = function () {
             datatable.search($(this).val().toLowerCase(), 'status');
         });
 
-        $('#m_form_invoice').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'invoice');
+        $('#m_form_company_invoice').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'company_invoice');
         });
 
         $('#m_form_medicine').on('change', function () {
