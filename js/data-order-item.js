@@ -54,64 +54,87 @@ var DatatableRemoteAjaxDemo = function () {
             },
 
             // columns definition
-            columns: [
-                {
-                    field: 'RecordID',
-                    title: '#',
-                    sortable: false, // disable sort for this column
-                    width: 40,
-                    selector: false,
-                    textAlign: 'center',
-                }, {
-                    field: 'invoice',
-                    title: 'Invoice',
-                }, {
-                    field: 'medicine',
-                    title: 'Medicine',
-                }, {
-                    field: 'company',
-                    title: 'Company',
-                }, {
-                    field: 'batch_no',
-                    title: 'Batch No',
-                }, {
-                    field: 'quantity',
-                    title: 'Quantity',
-                }, {
-                    field: 'mfg_date',
-                    title: 'MFG Date',
-                    type: 'date',
-                    format: 'MM/DD/YYYY',
-                }, {
-                    field: 'exp_date',
-                    title: 'EXP Date',
-                }, {
-                    field: 'status',
-                    title: 'Status',
-                    // callback function support for column rendering
-                    template: function (row) {
-                        var status = {
-                            'RETURNED': {'title': 'RETURNED', 'class': 'm-badge--brand'},
-                            'SOLD': {'title': 'SOLD', 'class': 'm-badge  m-badge--danger m-badge--wide'},
-                            'REMOVED': {'title': 'REMOVED', 'class': 'm-badge--brand'},
-                            'OK': {'title': 'OK', 'class': 'm-badge  m-badge--metal m-badge--wide'},
-                        };
-                        return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
-                    },
+            columns: [{
+                field: 'RecordID',
+                title: '#',
+                sortable: false, // disable sort for this column
+                width: 40,
+                selector: false,
+                textAlign: 'center',
+            }, {
+                field: 'pharmacy_branch',
+                title: 'Pharmacy',
+            }, {
+                field: 'pharmacy_licence_no',
+                title: 'Licence No',
+            }, {
+                field: 'company_invoice',
+                title: 'Invoice',
+            }, {
+                field: 'medicine',
+                title: 'Medicine',
+            }, {
+                field: 'company',
+                title: 'Company',
+            }, {
+                field: 'batch_no',
+                title: 'Batch No',
+            }, {
+                field: 'quantity',
+                title: 'Quantity',
+            }, {
+                field: 'mfg_date',
+                title: 'MFG Date',
+                type: 'date',
+                format: 'MM/DD/YYYY',
+            }, {
+                field: 'exp_date',
+                title: 'EXP Date',
+            }, {
+                field: 'status',
+                title: 'Status',
+                // callback function support for column rendering
+                template: function (row) {
+                    var status = {
+                        'RETURNED': {
+                            'title': 'RETURNED',
+                            'class': 'm-badge--brand'
+                        },
+                        'SOLD': {
+                            'title': 'SOLD',
+                            'class': 'm-badge  m-badge--danger m-badge--wide'
+                        },
+                        'REMOVED': {
+                            'title': 'REMOVED',
+                            'class': 'm-badge--brand'
+                        },
+                        'OK': {
+                            'title': 'OK',
+                            'class': 'm-badge  m-badge--metal m-badge--wide'
+                        },
+                    };
+                    return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
                 },
-            ],
+            }, ],
         });
 
-        $('#m_form_status').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'status');
+        $('#m_form_exp_type').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'exp_type');
         });
 
-        $('#m_form_invoice').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'invoice');
+        $('#m_form_pharmacy_licence_no').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'pharmacy_licence_no');
+        });
+        $('#m_form_branch_city').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'branch_city');
         });
 
-        $('#m_form_medicine').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'medicine');
+        $('#m_form_branch_area').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'branch_area');
+        });
+
+        $('#m_form_pharmacy').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'pharmacy');
         });
 
         $('#m_form_id').on('change', function () {
