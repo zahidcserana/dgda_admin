@@ -114,7 +114,10 @@ class OrderController extends Controller
                 $company = $item->company;
                 $aData['company'] = $company->company_name;
 
-                $aData['invoice'] = $order->invoice;
+                $aData['company_invoice'] = $order->company_invoice;
+
+                $pharmacyBranch = $order->PharmacyBranch;
+                $aData['pharmacy_branch'] = $pharmacyBranch->branch_name;
 
                 $medicine = $item->medicine;
                 $aData['medicine'] = $medicine->brand_name;
@@ -263,8 +266,8 @@ class OrderController extends Controller
 
         $conditions = array();
 
-        if (isset($query['invoice']) && !empty($query['invoice'])) {
-            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
+        if (isset($query['company_invoice']) && !empty($query['company_invoice'])) {
+            $conditions = array_merge(array(['company_invoice', 'LIKE', '%' . $query['company_invoice'] . '%']), $conditions);
         }
         if (isset($query['status']) && !empty($query['status'])) {
             $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
