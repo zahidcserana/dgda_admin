@@ -1126,7 +1126,7 @@ $routeName = Route::getCurrentRoute()->getName();
                     <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                         <span class="m-footer__copyright">
                             2019 &copy; DGDA
-                            <a href="https://keenthemes.com" class="m-link">
+                            <a href="http://103.23.41.189:94" class="m-link" target="_blank">
                                 Smart Pharmacy
                             </a>
                         </span>
