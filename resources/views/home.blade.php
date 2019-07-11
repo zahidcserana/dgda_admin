@@ -64,17 +64,19 @@
                     <div class="col-sm-12 col-md-12 col-lg-6">
                         <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
                             <div class="m-portlet__body">
-                                <div class="m-widget26">
-                                    <div class="m-widget26__number">
-                                        {{$total_order}}
-                                        <small>
-                                            Order
-                                        </small>
+                                <a href="{{route('order_items')}}">
+                                    <div class="m-widget26">
+                                        <div class="m-widget26__number">
+                                            {{$total_order}}
+                                            <small>
+                                                Order
+                                            </small>
+                                        </div>
+                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                        </div>
                                     </div>
-                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="m--space-30"></div>
