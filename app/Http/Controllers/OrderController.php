@@ -144,11 +144,11 @@ class OrderController extends Controller
         $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
         $exp3M = date('Y-m-d', strtotime("+3 months", strtotime(date('Y-m-d'))));
         if ($date < $today) {
-            return '<blink><span class="m-badge  m-badge--danger m-badge--wide.">' . $expDate . '</span></blink>';
+            return '<blink><span class="m-badge  m-badge--danger m-badge--wide">' . $expDate . '</span></blink>';
         } else if ($date >= $today && $date <= $exp1M) {
-            return '<blink><span class="m-badge  m-badge--info m-badge--wide">' . $expDate . '</span></blink>';
-        } else if ($date > $exp1M && $date <= $exp3M) {
             return '<blink><span class="m-badge  m-badge--warning m-badge--wide">' . $expDate . '</span></blink>';
+        } else if ($date > $exp1M && $date <= $exp3M) {
+            return '<blink><span class="m-badge  m-badge--success m-badge--wide">' . $expDate . '</span></blink>';
         } else {
             return '<span class="m-badge  m-badge--metal m-badge--wide">' . $expDate . '</span>';
         }
