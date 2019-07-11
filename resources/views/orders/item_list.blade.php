@@ -45,7 +45,7 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
-
+    /** blink start */
     blink {
         animation: blinker 0.6s linear infinite;
         color: #1c87c9;
@@ -76,6 +76,7 @@
             opacity: 0;
         }
     }
+    /** blink end */
 
 </style>
 @endsection
