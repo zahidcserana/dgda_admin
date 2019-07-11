@@ -8,7 +8,7 @@
             <div class="m-login__container">
                 <div class="m-login__logo">
                     <a href="#">
-                        <img src="{{asset('assets/app/media/img//logos/logo-1.png')}}">
+                        <img width="100" src="{{asset('assets/app/media/img//logos/logo-1.png')}}">
                     </a>
                 </div>
                 <div class="m-login__signin">
@@ -50,11 +50,11 @@
                                     <span></span>
                                 </label>
                             </div>
-                            <div class="col m--align-right m-login__form-right">
+                           {{-- <div class="col m--align-right m-login__form-right">
                                 <a href="javascript:;" id="m_login_forget_password" class="m-link">
                                     Forget Password ?
                                 </a>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="m-login__form-action">
                             <button type="submit"
@@ -142,7 +142,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="m-login__account">
+                {{--<div class="m-login__account">
 							<span class="m-login__account-msg">
 								Don't have an account yet ?
 							</span>
@@ -150,7 +150,7 @@
                     <a href="javascript:;" id="m_login_signup" class="m-link m-link--light m-login__account-link">
                         Sign Up
                     </a>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>

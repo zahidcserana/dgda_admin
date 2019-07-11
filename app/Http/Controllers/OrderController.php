@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicine;
+use App\Models\MedicineCompany;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,7 @@ use File;
 use Image;
 use Uuid;
 use Session;
+use App\Models\PharmacyBranch;
 
 class OrderController extends Controller
 {
@@ -140,22 +142,123 @@ class OrderController extends Controller
 
         $today = date('Y-m-d');
         $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
-        $exp2M = date('Y-m-d', strtotime("+2 months", strtotime(date('Y-m-d'))));
         $exp3M = date('Y-m-d', strtotime("+3 months", strtotime(date('Y-m-d'))));
         if ($date < $today) {
-            return '<span class="m-badge  m-badge--danger m-badge--wide.">' . $expDate . '</span>';
-        } else if ($date > $exp3M) {
-            return '<span class="m-badge  m-badge--info m-badge--wide">' . $expDate . '</span>';
-        } else if ($date > $exp2M) {
-            return '<span class="m-badge  m-badge--success m-badge--wide">' . $expDate . '</span>';
-        } else if ($date > $exp1M) {
-            return '<span class="m-badge  m-badge--warning m-badge--wide">' . $expDate . '</span>';
+            return '<blink><span class="m-badge  m-badge--danger m-badge--wide.">' . $expDate . '</span></blink>';
+        } else if ($date >= $today && $date <= $exp1M) {
+            return '<blink><span class="m-badge  m-badge--info m-badge--wide">' . $expDate . '</span></blink>';
+        } else if ($date > $exp1M && $date <= $exp3M) {
+            return '<blink><span class="m-badge  m-badge--warning m-badge--wide">' . $expDate . '</span></blink>';
         } else {
             return '<span class="m-badge  m-badge--metal m-badge--wide">' . $expDate . '</span>';
         }
     }
 
     public function itemList(Request $request)
+    {
+        $query = $request->query('query');
+
+        $pageNo = $request->query('page_no') ?? 1;
+        $limit = $request->query('limit') ?? 100;
+        $offset = (($pageNo - 1) * $limit);
+        $where = array();
+        $where = array_merge(array(['orders.is_manual', true]), $where);
+
+
+        if (!empty($query['pharmacy_licence_no'])) {
+            $where = array_merge(array(['pharmacies.pharmacy_shop_licence_no', 'LIKE', '%' . $query['pharmacy_licence_no'] . '%']), $where);
+        }
+        if (!empty($query['pharmacy'])) {
+             $where = array_merge(array(['pharmacy_branches.branch_name', 'LIKE', '%' . $query['pharmacy'] . '%']), $where);
+        }
+        if (!empty($query['batch_no'])) {
+            $where = array_merge(array(['order_items.batch_no', 'LIKE', '%' . $query['batch_no'] . '%']), $where);
+        }
+        if (!empty($query['branch_city'])) {
+            $where = array_merge(array(['pharmacy_branches.branch_city', 'LIKE', '%' . $query['branch_city'] . '%']), $where);
+        }
+        if (!empty($query['branch_area'])) {
+            $where = array_merge(array(['pharmacy_branches.branch_area', 'LIKE', '%' . $query['branch_area'] . '%']), $where);
+        }
+        if (!empty($query['exp_type'])) {
+            $where = $this->_getExpCondition($where, $query['exp_type']);
+        }
+
+        $query = Order::where($where)
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->join('pharmacy_branches', 'orders.pharmacy_branch_id', '=', 'pharmacy_branches.id')
+            ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
+        $total = $query->count();
+        $orders = $query
+            ->orderBy('orders.id', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+        $orderData = array();
+        foreach ($orders as $item) {
+            //$items = $order->items()->get();
+
+            $aData = array();
+            $aData['id'] = $item->id;
+            $aData['order_id'] = $item->order_id;
+
+            $company = MedicineCompany::findOrFail($item->company_id);
+            $aData['company'] = $company->company_name;
+
+            $aData['pharmacy_branch'] = $item->branch_name;
+            $aData['pharmacy_licence_no'] = $item->pharmacy_shop_licence_no;
+
+            $aData['company_invoice'] = $item->company_invoice;
+
+            $medicine = Medicine::findOrFail($item->medicine_id);
+            $aData['medicine'] = $medicine->brand_name;
+
+            $aData['exp_date'] = $this->_getExpStatus($item->exp_date);
+            $aData['mfg_date'] = date("F, Y", strtotime($item->mfg_date));
+
+            //$aData['mfg_date'] = $item->mfg_date;
+            $aData['batch_no'] = $item->batch_no;
+            $aData['quantity'] = $item->quantity;
+            $aData['status'] = $item->status;
+
+            $orderData[] = $aData;
+
+        }
+
+        $data = array(
+            'total' => $total,
+            'data' => $orderData,
+            'page_no' => $pageNo,
+            'limit' => $limit,
+        );
+        echo json_encode($orderData);
+    }
+    private function _getExpCondition($where, $expTpe)
+    {
+        $today = date('Y-m-d');
+        $exp1M = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
+        $exp3M = date('Y-m-d', strtotime("+3 months", strtotime(date('Y-m-d'))));
+        if ($expTpe == 2) {
+            $where = array_merge(array(
+                ['order_items.exp_date', '>', $today],
+                ['order_items.exp_date', '<', $exp1M]
+            ), $where);
+        } else if ($expTpe == 3) {
+            $where = array_merge(array(
+                ['order_items.exp_date', '>', $exp1M],
+                ['order_items.exp_date', '<', $exp3M]
+            ), $where);
+        } else if ($expTpe == 1) {
+            $where = array_merge(array(
+                ['order_items.exp_date', '>', $exp3M]
+            ), $where);
+        } else if ($expTpe == 4) {
+            $where = array_merge(array(['order_items.exp_date', '<', $today]), $where);
+        }
+        return $where;
+    }
+
+    public function itemList_old(Request $request)
     {
         $user = Auth::user();
         $userType = $user->user_type ?? 'DGDA';
