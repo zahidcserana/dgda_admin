@@ -49,7 +49,7 @@ $routeName = Route::getCurrentRoute()->getName();
                     <div class="m-stack m-stack--ver m-stack--general">
                         <div class="m-stack__item m-stack__item--middle m-stack__item--center m-brand__logo">
                             <a href="{{route('home')}}" class="m-brand__logo-wrapper">
-                                <img alt="" src="assets/demo/demo3/media/img/logo/logo.png"/>
+                                <img width="60" alt="" src="assets/demo/demo3/media/img/logo/logo.png"/>
                             </a>
                         </div>
                         <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -77,7 +77,7 @@ $routeName = Route::getCurrentRoute()->getName();
                     <button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
                         <i class="la la-close"></i>
                     </button>
-                    <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
+                    {{--<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
                         <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                             <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
                                 <a  href="#" class="m-menu__link m-menu__toggle">
@@ -659,13 +659,13 @@ $routeName = Route::getCurrentRoute()->getName();
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div>--}}
                     <!-- END: Horizontal Menu -->								<!-- BEGIN: Topbar -->
                     <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
                         <div class="m-stack__item m-topbar__nav-wrapper">
                             <ul class="m-topbar__nav m-nav m-nav--inline">
-                                <li class="
-	m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
+                                {{--
+                                <li class="m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
                                     data-dropdown-toggle="click" data-dropdown-persistent="true" id="m_quicksearch" data-search-type="dropdown">
                                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-nav__link-icon">
@@ -963,6 +963,7 @@ $routeName = Route::getCurrentRoute()->getName();
                                         </div>
                                     </div>
                                 </li>
+                                --}}
                                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
                                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
@@ -990,6 +991,7 @@ $routeName = Route::getCurrentRoute()->getName();
                                             <div class="m-dropdown__body">
                                                 <div class="m-dropdown__content">
                                                     <ul class="m-nav m-nav--skin-light">
+                                                        {{--
                                                         <li class="m-nav__section m--hide">
 																	<span class="m-nav__section-text">
 																		Section
@@ -1046,6 +1048,7 @@ $routeName = Route::getCurrentRoute()->getName();
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__separator m-nav__separator--fit"></li>
+                                                        --}}
                                                         <li class="m-nav__item">
                                                             {{--<a href="snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">--}}
                                                             {{--Logout--}}
@@ -1069,13 +1072,13 @@ $routeName = Route::getCurrentRoute()->getName();
                                         </div>
                                     </div>
                                 </li>
-                                <li id="m_quick_sidebar_toggle" class="m-nav__item">
+                               {{-- <li id="m_quick_sidebar_toggle" class="m-nav__item">
                                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-nav__link-icon">
 													<i class="flaticon-menu-button"></i>
 												</span>
                                     </a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                     </div>
@@ -1114,7 +1117,7 @@ $routeName = Route::getCurrentRoute()->getName();
 								</a>
 							</span>
                 </div>
-                <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+                {{--<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
                     <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
                         <li class="m-nav__item">
                             <a href="#" class="m-nav__link">
@@ -1150,7 +1153,7 @@ $routeName = Route::getCurrentRoute()->getName();
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div>--}}
             </div>
         </div>
     </footer>
@@ -1165,7 +1168,7 @@ $routeName = Route::getCurrentRoute()->getName();
     <i class="la la-arrow-up"></i>
 </div>
 <!-- end::Scroll Top -->		    <!-- begin::Quick Nav -->
-<ul class="m-nav-sticky" style="margin-top: 30px;">
+{{--<ul class="m-nav-sticky" style="margin-top: 30px;">
     <!--
     <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Showcase" data-placement="left">
         <a href="">
@@ -1193,7 +1196,7 @@ $routeName = Route::getCurrentRoute()->getName();
             <i class="la la-life-ring"></i>
         </a>
     </li>
-</ul>
+</ul>--}}
 <!-- begin::Quick Nav -->
 <!--begin::Base Scripts -->
 <script src="{{ asset('assets/vendors/base/vendors.bundle.js') }}" type="text/javascript"></script>
