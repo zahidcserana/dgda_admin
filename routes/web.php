@@ -49,6 +49,9 @@ Route::get('/orders/{id}/details', 'OrderController@details')->name('order_detai
 Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit');
 Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete');
 
+/** Pharmacy */
+Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
+Route::get('/pharmacies/list', 'PharmacyController@pharmacyList')->name('pharmacy_list');
 
 /* Users */
 Route::get('/users/{id?}', 'UsersController@index')->name('users');

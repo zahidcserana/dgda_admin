@@ -31,17 +31,19 @@
                     <div class="col-sm-12 col-md-12 col-lg-6">
                         <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-brand ">
                             <div class="m-portlet__body">
-                                <div class="m-widget26">
-                                    <div class="m-widget26__number">
-                                        {{$total_pharmacy}}
-                                        <small>
-                                            Pharmacy
-                                        </small>
+                                <a href="{{ route('pharmacies') }}">
+                                    <div class="m-widget26">
+                                        <div class="m-widget26__number">
+                                            {{$total_pharmacy}}
+                                            <small>
+                                                Pharmacy
+                                            </small>
+                                        </div>
+                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                            {{--<canvas id="m_chart_quick_stats_1"></canvas>--}}
+                                        </div>
                                     </div>
-                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                        {{--<canvas id="m_chart_quick_stats_1"></canvas>--}}
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="m--space-30"></div>
