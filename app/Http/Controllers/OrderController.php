@@ -148,7 +148,7 @@ class OrderController extends Controller
         } else if ($date >= $today && $date <= $exp1M) {
             return '<blink><span class="m-badge  m-badge--warning m-badge--wide">' . $expDate . '</span></blink>';
         } else if ($date > $exp1M && $date <= $exp3M) {
-            return '<blink><span class="m-badge  m-badge--success m-badge--wide">' . $expDate . '</span></blink>';
+            return '<blink><span class="m-badge  m-badge--month3 m-badge--wide">' . $expDate . '</span></blink>';
         } else {
             return '<span class="m-badge  m-badge--metal m-badge--wide">' . $expDate . '</span>';
         }

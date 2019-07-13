@@ -46,6 +46,11 @@
         background-color: #3e8e41;
     }
 
+    .m-badge.m-badge--month3 {
+        background-color: yellow;
+        color: black;
+    }
+
     /** blink start */
     blink {
         animation: blinker 0.6s linear infinite;
@@ -260,9 +265,11 @@
                                                 <select class="form-control m-select" id="m_form_exp_type">
                                                     <option value=''>- Exp Type -</option>
                                                     <option value="1">OK</option>
-                                                    <option style="color: orange" value="2">Expired in 1 Month</option>
-                                                    <option style="color: #00BEA5" value="3">Expired in 3 Month</option>
-                                                    <option style="color: red" value="4">Expired</option>
+                                                    <option style="background-color: orange" value="2">Expired in 1
+                                                        Month</option>
+                                                    <option style="background-color: yellow;" value="3">Expired in 3
+                                                        Month</option>
+                                                    <option style="background-color: red" value="4">Expired</option>
                                                 </select>
                                             </div>
                                         </div>
