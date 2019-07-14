@@ -56,16 +56,6 @@ var DatatableRemoteAjaxDemo = function () {
             // columns definition
             columns: [
                 {
-                    field: 'RecordID',
-                    title: '#',
-                    sortable: false, // disable sort for this column
-                    width: 40,
-                    selector: false,
-                    textAlign: 'center',
-                }, {
-                    field: 'id',
-                    title: 'ID',
-                }, {
                     field: 'pharmacy_shop_name',
                     title: 'Pharmacy',
                 }, {
