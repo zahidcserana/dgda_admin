@@ -99,7 +99,7 @@
         <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
             <a  href="#" class="m-menu__link m-menu__toggle">
                 <span class="m-menu__item-here"></span>
-                <i class="m-menu__link-icon flaticon-open-box"></i>
+                <i class="m-menu__link-icon flaticon-layers"></i>
                 <span class="m-menu__link-text">
                     Pharmacy
                 </span>
