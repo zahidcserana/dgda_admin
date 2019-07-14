@@ -75,11 +75,14 @@ var DatatableRemoteAjaxDemo = function () {
                     field: 'branch_area',
                     title: 'Area',
                 }, {
+                    field: 'branch_full_address',
+                    title: 'Address',
+                }, {
                     field: 'pharmacy_shop_licence_no',
                     title: 'Licence No',
                 }, {
                     field: 'created_at',
-                    title: 'Created',
+                    title: 'Date',
                     type: 'date',
                     format: 'MM/DD/YYYY',
                 },

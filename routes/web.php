@@ -50,8 +50,8 @@ Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit')->middlew
 Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete')->middleware('auth');
 
 /** Pharmacy */
-Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
-Route::get('/pharmacies/list', 'PharmacyController@pharmacyList')->name('pharmacy_list');
+Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies')->middleware('auth');
+Route::get('/pharmacies/list', 'PharmacyController@pharmacyList')->name('pharmacy_list')->middleware('auth');
 
 /* Users */
 Route::get('/users/{id?}', 'UsersController@index')->name('users');

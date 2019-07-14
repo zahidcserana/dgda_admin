@@ -59,6 +59,10 @@ class PharmacyController extends Controller
         ->join('pharmacies', 'pharmacy_branches.pharmacy_id', '=', 'pharmacies.id')
         ->get();
 
+        foreach($pharmacies as $pharmacy){
+            $pharmacy->created_at = date("F j, Y", $pharmacy->created_at);
+        }
+
         $data['pharmacies'] = $pharmacies;
 
         echo json_encode($pharmacies);
