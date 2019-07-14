@@ -55,7 +55,6 @@ class PharmacyController extends Controller
         }
         $pharmacies = DB::table('pharmacy_branches')
         ->where($conditions)
-        ->orderBy('pharmacy_branches.id', 'desc')
         ->join('pharmacies', 'pharmacy_branches.pharmacy_id', '=', 'pharmacies.id')
         ->get();
 
