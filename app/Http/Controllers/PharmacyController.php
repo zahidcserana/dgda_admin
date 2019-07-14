@@ -60,10 +60,8 @@ class PharmacyController extends Controller
         ->get();
 
         foreach($pharmacies as $pharmacy){
-            $pharmacy->created_at = date("F j, Y", $pharmacy->created_at);
+            $pharmacy->created_at = date("F j, Y", strtotime($pharmacy->created_at));
         }
-
-        $data['pharmacies'] = $pharmacies;
 
         echo json_encode($pharmacies);
     }
