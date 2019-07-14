@@ -190,7 +190,6 @@ class OrderController extends Controller
             ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
         $total = $query->count();
         $orders = $query
-            ->orderBy('orders.id', 'desc')
             ->offset($offset)
             ->limit($limit)
             ->get();
