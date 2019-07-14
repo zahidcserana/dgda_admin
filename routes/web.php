@@ -40,14 +40,14 @@ Route::get('/', 'HomeController@index')->name('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
 /** Orders */
-Route::get('/orders', 'OrderController@index')->name('orders');
+Route::get('/orders', 'OrderController@index')->name('orders')->middleware('auth');
 Route::get('/orders/list', 'OrderController@orderList')->name('order_list');   // ajax
-Route::get('/orders/items', 'OrderController@orderItems')->name('order_items');
+Route::get('/orders/items', 'OrderController@orderItems')->name('order_items')->middleware('auth');
 Route::get('/orders/item-list', 'OrderController@itemList')->name('item_list'); // ajax
-Route::get('/orders/{id}', 'OrderController@view')->name('order_view');
-Route::get('/orders/{id}/details', 'OrderController@details')->name('order_details');
-Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit');
-Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete');
+Route::get('/orders/{id}', 'OrderController@view')->name('order_view')->middleware('auth');
+Route::get('/orders/{id}/details', 'OrderController@details')->name('order_details')->middleware('auth');
+Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit')->middleware('auth');
+Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete')->middleware('auth');
 
 /** Pharmacy */
 Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies');
