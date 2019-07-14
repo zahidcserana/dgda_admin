@@ -66,8 +66,11 @@ var DatatableRemoteAjaxDemo = function () {
                     field: 'id',
                     title: 'ID',
                 }, {
+                    field: 'pharmacy_shop_name',
+                    title: 'Pharmacy',
+                }, {
                     field: 'branch_name',
-                    title: 'Name',
+                    title: 'Branch',
                 }, {
                     field: 'branch_city',
                     title: 'City',
