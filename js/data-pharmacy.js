@@ -72,6 +72,9 @@ var DatatableRemoteAjaxDemo = function () {
                     field: 'branch_city',
                     title: 'City',
                 }, {
+                    field: 'branch_area',
+                    title: 'Area',
+                }, {
                     field: 'pharmacy_shop_licence_no',
                     title: 'Licence No',
                 }, {
