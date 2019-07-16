@@ -41,7 +41,7 @@
                         </a>
                     </li>--}}
 
-                    <li style="{{Auth::user()->user_type=='ADMIN'?'display:block':'display:none'}}" class="m-menu__item " aria-haspopup="true" >
+                    <li style="{{Auth::user()->user_type=='DGDA'?'display:block':'display:none'}}" class="m-menu__item " aria-haspopup="true" >
                         <a  href="{{route('orders')}}" class="m-menu__link ">
                             <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                 <span></span>

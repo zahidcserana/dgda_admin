@@ -25,10 +25,10 @@
     <div class="m-content">
         <!--Begin::Section-->
         <div class="row">
-            <div class="col-xl-4">
+            <div class="col-xl-12">
                 <!--begin:: Widgets/Quick Stats-->
                 <div class="row m-row--full-height">
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-3">
                         <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-brand ">
                             <div class="m-portlet__body">
                                 <a href="{{ route('pharmacies') }}">
@@ -63,7 +63,7 @@
                             </div>
                         </div>--}}
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-3">
                         <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
                             <div class="m-portlet__body">
                                 <a href="{{route('order_items')}}">
@@ -71,7 +71,7 @@
                                         <div class="m-widget26__number">
                                             {{$total_order}}
                                             <small>
-                                                Order
+                                                Invoice
                                             </small>
                                         </div>
                                         <div class="m-widget26__chart" style="height:90px; width: 220px;">
@@ -82,22 +82,48 @@
                             </div>
                         </div>
                         <div class="m--space-30"></div>
-                        {{--<div class="m-portlet m-portlet--half-height m-portlet--border-bottom-accent ">
-                            <div class="m-portlet__body">
-                                <div class="m-widget26">
-                                    <div class="m-widget26__number">
-                                        470
-                                        <small>
-                                            All Comissions
-                                        </small>
-                                    </div>
-                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                        <canvas id="m_chart_quick_stats_4"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--}}
                     </div>
+                    <div class="col-sm-12 col-md-12 col-lg-3">
+                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
+                            <div class="m-portlet__body">
+                                <a href="{{route('company_list')}}">
+                                    <div class="m-widget26">
+                                        <div class="m-widget26__number">
+                                            {{$total_company}}
+                                            <small>
+                                                Total Company
+                                            </small>
+                                        </div>
+                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="m--space-30"></div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-3">
+                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
+                            <div class="m-portlet__body">
+                                <a href="{{route('medicine')}}">
+                                    <div class="m-widget26">
+                                        <div class="m-widget26__number">
+                                            {{$total_medicine}}
+                                            <small>
+                                                Total Medicine
+                                            </small>
+                                        </div>
+                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="m--space-30"></div>
+                    </div>
+                    
                 </div>
                 <!--end:: Widgets/Quick Stats-->
             </div>

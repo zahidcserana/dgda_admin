@@ -116,6 +116,13 @@ var DatatableRemoteAjaxDemo = function () {
             datatable.search($(this).val().toLowerCase(), 'exp_type');
         });
 
+        $('#company_id').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'company_id');
+        });
+        $('#medicine_name').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'medicine_name');
+        });
+
         $('#m_form_pharmacy_licence_no').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'pharmacy_licence_no');
         });
