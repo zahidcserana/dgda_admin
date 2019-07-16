@@ -86,6 +86,7 @@
             opacity: 0;
         }
     }
+    
 
     /** blink end */
 </style>
@@ -218,6 +219,29 @@
                         <div class="row align-items-center">
                             <div class="col-xl-12 order-2 order-xl-1">
                                 <div class="form-group m-form__group row align-items-center">
+                                    
+                                    <div class="col-md-2">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__control">
+                                                <select class="form-control m-select"  name="company_id" id="company_id">
+                                                    <option value=''>- Select Company -</option>
+                                                    @foreach ($medicine_company as $company)
+                                                        <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__control">
+                                                <input type="text" class="form-control m-input"
+                                                    placeholder="Medicine Name" name="medicine_name" id="medicine_name">
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
 
                                     <div class="col-md-2">
                                         <div class="m-form__group m-form__group--inline">
@@ -239,21 +263,21 @@
                                         <div class="d-md-none m--margin-bottom-10"></div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <div class="m-form__group m-form__group--inline">
                                             <div class="m-form__control">
                                                 <input type="text" class="form-control m-input"
-                                                    placeholder="Branch City Name" id="m_form_branch_city">
+                                                    placeholder="City Name" id="m_form_branch_city">
                                             </div>
                                         </div>
                                         <div class="d-md-none m--margin-bottom-10"></div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <div class="m-form__group m-form__group--inline">
                                             <div class="m-form__control">
                                                 <input type="text" class="form-control m-input"
-                                                    placeholder="Branch Area Name" id="m_form_branch_area">
+                                                    placeholder="Area Name" id="m_form_branch_area">
                                             </div>
                                         </div>
                                         <div class="d-md-none m--margin-bottom-10"></div>

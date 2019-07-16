@@ -49,6 +49,14 @@ Route::get('/orders/{id}/details', 'OrderController@details')->name('order_detai
 Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit')->middleware('auth');
 Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete')->middleware('auth');
 
+/** Company */
+Route::get('/company/list', 'OrderController@companyList');   // ajax
+Route::get('/company/lists', 'OrderController@companyView')->name('company_list')->middleware('auth');
+
+/** Medicine */
+Route::get('/medicine/list', 'OrderController@medicineList');   // ajax
+Route::get('/medicine', 'OrderController@medicineView')->name('medicine')->middleware('auth');
+
 /** Pharmacy */
 Route::get('/pharmacies', 'PharmacyController@index')->name('pharmacies')->middleware('auth');
 Route::get('/pharmacies/list', 'PharmacyController@pharmacyList')->name('pharmacy_list')->middleware('auth');

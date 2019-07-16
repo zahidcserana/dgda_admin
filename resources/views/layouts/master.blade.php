@@ -31,6 +31,7 @@ $routeName = Route::getCurrentRoute()->getName();
     <!--end::Page Vendors -->
     <link href="{{ asset('assets/vendors/base/vendors.bundle.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/demo/demo3/base/style.bundle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="{{ asset('assets/demo/demo3/media/img/logo/favicon.ico') }}" />
     @yield('include_js')

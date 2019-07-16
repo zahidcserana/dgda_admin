@@ -93,8 +93,49 @@ class OrderController extends Controller
     {
         $data = array();
         $data['title'] = 'Order';
+        $medicine_company = DB::table('medicine_companies')->orderBy('company_name', 'ASC')->get();
+        $data['medicine_company'] = $medicine_company;
 
         return view('orders.item_list', $data);
+    }
+
+    public function companyView(){
+        $data = array();
+        $data['title'] = 'Company';
+
+        return view('orders.company_list', $data);
+    }
+
+    public function medicineView(){
+        $data = array();
+        $data['title'] = 'Medicine';
+
+        return view('orders.medicine_list', $data);
+    }
+
+    //for Ajax Call
+    public function companyList(){
+        $companies = DB::table('order_items')->select('company_id', DB::raw('count(*) as total'))->groupBy('company_id')->get();
+        $company_lists = [];
+        foreach($companies as $company):
+            $company_info = DB::table('medicine_companies')->where('id', $company->company_id)->get();
+            if(count($company_info)){
+                $company_lists[] = $company_info[0];
+            }
+        endforeach;
+        echo json_encode($company_lists);
+    }
+
+    public function medicineList(){
+        $medicine = DB::table('order_items')->select('medicine_id', DB::raw('count(*) as total'))->groupBy('medicine_id')->get();
+        $medicine_lists = [];
+        foreach($medicine as $item):
+            $medicine_info = DB::table('medicines')->where('id', $item->medicine_id)->get();
+            if(count($medicine_info)){
+                $medicine_lists[] = $medicine_info[0];
+            }
+        endforeach;
+        echo json_encode($medicine_lists);
     }
 
     public function _getItemList($where)
@@ -180,12 +221,24 @@ class OrderController extends Controller
         if (!empty($query['branch_area'])) {
             $where = array_merge(array(['pharmacy_branches.branch_area', 'LIKE', '%' . $query['branch_area'] . '%']), $where);
         }
+        if (!empty($query['medicine_name'])) {
+            $where = array_merge(array(['medicines.brand_name', 'LIKE', '%' . $query['medicine_name'] . '%']), $where);
+        }
         if (!empty($query['exp_type'])) {
             $where = $this->_getExpCondition($where, $query['exp_type']);
         }
+        if (!empty($query['company_id'])) {
+            $company_id = $query['company_id'];
+        }else{
+            $company_id = 0;
+        }
 
         $query = Order::where($where)
+            ->when($company_id, function ($dbquery) use ($company_id) {
+                return $dbquery->where('orders.company_id', $company_id);
+            })
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->join('medicines', 'order_items.medicine_id', '=', 'medicines.id')
             ->join('pharmacy_branches', 'orders.pharmacy_branch_id', '=', 'pharmacy_branches.id')
             ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
         $total = $query->count();
