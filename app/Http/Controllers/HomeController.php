@@ -25,12 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         $pharmacy = DB::table('pharmacy_branches')->count();
-        $order = DB::table('orders')->select('company_invoice', DB::raw('count(*) as total'))->groupBy('company_invoice')->get();
+        $order = DB::table('orders')->select('company_invoice')->distinct()->get()->count();
         $company = DB::table('order_items')->select('company_id')->distinct()->get()->count();
         $medicine = DB::table('order_items')->select('medicine_id')->distinct()->get()->count();
        
         $data = array();
-        $data['total_order'] = count($order);
+        $data['total_order'] = $order;
         $data['total_pharmacy'] = $pharmacy;
         $data['total_company'] = $company;
         $data['total_medicine'] = $medicine;
