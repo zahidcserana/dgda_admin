@@ -159,8 +159,8 @@ class OrderController extends Controller
         $query = $request->query('query');
 
         $pageNo = $request->query('page_no') ?? 1;
-        $limit = $request->query('limit') ?? 100;
-        $offset = (($pageNo - 1) * $limit);
+       // $limit = $request->query('limit') ?? 100;
+       // $offset = (($pageNo - 1) * $limit);
         $where = array();
         $where = array_merge(array(['orders.is_manual', true]), $where);
 
@@ -190,8 +190,8 @@ class OrderController extends Controller
             ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
         $total = $query->count();
         $orders = $query
-            ->offset($offset)
-            ->limit($limit)
+            //->offset($offset)
+            //->limit($limit)
             ->get();
         $orderData = array();
         foreach ($orders as $item) {
@@ -228,7 +228,7 @@ class OrderController extends Controller
             'total' => $total,
             'data' => $orderData,
             'page_no' => $pageNo,
-            'limit' => $limit,
+           // 'limit' => $limit,
         );
         echo json_encode($orderData);
     }
