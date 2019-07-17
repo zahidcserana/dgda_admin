@@ -28,12 +28,14 @@ class HomeController extends Controller
         $order = DB::table('orders')->select('company_invoice')->distinct()->get()->count();
         $company = DB::table('order_items')->select('company_id')->distinct()->get()->count();
         $medicine = DB::table('order_items')->select('medicine_id')->distinct()->get()->count();
+        $entry = DB::table('order_items')->count();
        
         $data = array();
         $data['total_order'] = $order;
         $data['total_pharmacy'] = $pharmacy;
         $data['total_company'] = $company;
         $data['total_medicine'] = $medicine;
+        $data['total_entry'] = $entry;
         return view('home', $data);
     }
 }

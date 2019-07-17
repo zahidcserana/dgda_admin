@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @section('content')
-    <!-- BEGIN: Subheader -->
-    <div class="m-subheader ">
-        <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                <h3 class="m-subheader__title ">
-                    Dashboard
-                </h3>
-            </div>
-            <div>
-           {{-- <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title ">
+                Dashboard
+            </h3>
+        </div>
+        <div>
+            {{-- <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
                     <span class="m-subheader__daterange-date m--font-brand"></span>
@@ -18,36 +18,36 @@
                     <i class="la la-angle-down"></i>
                 </a>
             </span>--}}
-            </div>
         </div>
     </div>
-    <!-- END: Subheader -->
-    <div class="m-content">
-        <!--Begin::Section-->
-        <div class="row">
-            <div class="col-xl-12">
-                <!--begin:: Widgets/Quick Stats-->
-                <div class="row m-row--full-height">
-                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-brand ">
-                            <div class="m-portlet__body">
-                                <a href="{{ route('pharmacies') }}">
-                                    <div class="m-widget26">
-                                        <div class="m-widget26__number">
-                                            {{$total_pharmacy}}
-                                            <small>
-                                                Pharmacy
-                                            </small>
-                                        </div>
-                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                            {{--<canvas id="m_chart_quick_stats_1"></canvas>--}}
-                                        </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+    <!--Begin::Section-->
+    <div class="row">
+        <div class="col-xl-12">
+            <!--begin:: Widgets/Quick Stats-->
+            <div class="row m-row--full-height">
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-brand ">
+                        <div class="m-portlet__body">
+                            <a href="{{ route('pharmacies') }}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_pharmacy}}
+                                        <small>
+                                            Total Pharmacy
+                                        </small>
                                     </div>
-                                </a>
-                            </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_1"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="m--space-30"></div>
-                        {{--<div class="m-portlet m-portlet--half-height m-portlet--border-bottom-danger ">
+                    </div>
+                    <div class="m--space-30"></div>
+                    {{--<div class="m-portlet m-portlet--half-height m-portlet--border-bottom-danger ">
                             <div class="m-portlet__body">
                                 <div class="m-widget26">
                                     <div class="m-widget26__number">
@@ -62,75 +62,95 @@
                                 </div>
                             </div>
                         </div>--}}
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
-                            <div class="m-portlet__body">
-                                <a href="{{route('order_items')}}">
-                                    <div class="m-widget26">
-                                        <div class="m-widget26__number">
-                                            {{$total_order}}
-                                            <small>
-                                                Invoice
-                                            </small>
-                                        </div>
-                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="m--space-30"></div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
-                            <div class="m-portlet__body">
-                                <a href="{{route('company_list')}}">
-                                    <div class="m-widget26">
-                                        <div class="m-widget26__number">
-                                            {{$total_company}}
-                                            <small>
-                                                Total Company
-                                            </small>
-                                        </div>
-                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="m--space-30"></div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
-                            <div class="m-portlet__body">
-                                <a href="{{route('medicine')}}">
-                                    <div class="m-widget26">
-                                        <div class="m-widget26__number">
-                                            {{$total_medicine}}
-                                            <small>
-                                                Total Medicine
-                                            </small>
-                                        </div>
-                                        <div class="m-widget26__chart" style="height:90px; width: 220px;">
-                                            {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="m--space-30"></div>
-                    </div>
-                    
                 </div>
-                <!--end:: Widgets/Quick Stats-->
-            </div>
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
+                        <div class="m-portlet__body">
+                            <a href="{{route('order_items')}}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_order}}
+                                        <small>
+                                            Total Invoice
+                                        </small>
+                                    </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m--space-30"></div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-danger ">
+                        <div class="m-portlet__body">
+                            <a href="{{route('order_items')}}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_entry}}
+                                        <small>
+                                            Total Entry
+                                        </small>
+                                    </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m--space-30"></div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-info ">
+                        <div class="m-portlet__body">
+                            <a href="{{route('company_list')}}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_company}}
+                                        <small>
+                                            Total Company
+                                        </small>
+                                    </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m--space-30"></div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-warning ">
+                        <div class="m-portlet__body">
+                            <a href="{{route('medicine')}}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_medicine}}
+                                        <small>
+                                            Total Medicine
+                                        </small>
+                                    </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m--space-30"></div>
+                </div>
 
-            <div class="col-xl-4">
-                <!--begin:: Widgets/Finance Summary-->
-                {{--<div class="m-portlet m-portlet--full-height m-portlet--fit ">
+            </div>
+            <!--end:: Widgets/Quick Stats-->
+        </div>
+
+        <div class="col-xl-4">
+            <!--begin:: Widgets/Finance Summary-->
+            {{--<div class="m-portlet m-portlet--full-height m-portlet--fit ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -206,11 +226,11 @@
                         </div>
                     </div>
                 </div>--}}
-                <!--end:: Widgets/Finance Summary-->
-            </div>
-            <div class="col-xl-4">
-                <!--begin:: Widgets/Top Products-->
-                {{--<div class="m-portlet m-portlet--full-height m-portlet--fit ">
+            <!--end:: Widgets/Finance Summary-->
+        </div>
+        <div class="col-xl-4">
+            <!--begin:: Widgets/Top Products-->
+            {{--<div class="m-portlet m-portlet--full-height m-portlet--fit ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
@@ -339,10 +359,10 @@
                         <!--end::Widget 5-->
                     </div>
                 </div>--}}
-                <!--end:: Widgets/Top Products-->
-            </div>
-
+            <!--end:: Widgets/Top Products-->
         </div>
-        <!--End::Section-->
+
     </div>
+    <!--End::Section-->
+</div>
 @endsection
