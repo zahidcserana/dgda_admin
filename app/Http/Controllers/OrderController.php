@@ -328,9 +328,10 @@ class OrderController extends Controller
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->join('medicines', 'order_items.medicine_id', '=', 'medicines.id')
             ->join('pharmacy_branches', 'orders.pharmacy_branch_id', '=', 'pharmacy_branches.id')
-            ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
-            
+            ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id')->toSql();
+             var_dump($query);exit;
         $total = $query->count();
+       
         $orders = $query
             //->offset($offset)
             //->limit($limit)

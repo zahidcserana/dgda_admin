@@ -71,3 +71,6 @@ Route::get('/users/{id?}', 'UsersController@index')->name('users');
 Route::post('/users/{id}', 'UsersController@edit')->name('user_edit');
 Route::get('/user-delete/{id}', 'UsersController@delete')->name('user-delete');
 
+
+Route::get('/orderRepair', 'HomeController@orderRepair');
+
