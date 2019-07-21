@@ -73,4 +73,16 @@ class HomeController extends Controller
         echo json_encode($distinct_order_info);
     }
     
+    public function getExtraItem(){
+        $items = OrderItem::all();
+        $ids = array();
+        foreach($items as $item){
+            
+            if(!Order::find($item->order_id)){
+                $ids[] = $item->order_id;
+                echo $item->order_id."<br>";
+            }
+        }
+        
+    }
 }
