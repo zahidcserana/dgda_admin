@@ -66,7 +66,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-2">
                     <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-success ">
                         <div class="m-portlet__body">
-                            <a href="{{route('order_items')}}">
+                            <a href="{{route('invoices')}}">
                                 <div class="m-widget26">
                                     <div class="m-widget26__number">
                                         {{$total_order}}

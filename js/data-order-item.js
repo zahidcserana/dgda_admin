@@ -54,13 +54,9 @@ var DatatableRemoteAjaxDemo = function () {
             },
 
             // columns definition
-            columns: [
-            {
+            columns: [{
                 field: 'pharmacy_branch',
                 title: 'Pharmacy',
-            }, {
-                field: 'pharmacy_licence_no',
-                title: 'Licence No',
             }, {
                 field: 'company_invoice',
                 title: 'Invoice',
@@ -116,7 +112,7 @@ var DatatableRemoteAjaxDemo = function () {
             datatable.search($(this).val().toLowerCase(), 'exp_type');
         });
 
-        $('#company_id').on('change', function () {
+        $('#m_form_company_id').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'company_id');
         });
         $('#medicine_name').on('change', function () {

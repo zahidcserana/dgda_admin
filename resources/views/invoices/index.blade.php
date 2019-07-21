@@ -2,7 +2,7 @@
 @section('include_js')
 @parent
 <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/data-order-item.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/data-invoice.js') }}" type="text/javascript"></script>
 
 <style>
     .dropbtn {
@@ -45,50 +45,6 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
-
-    .m-badge.m-badge--month3 {
-        background-color: yellow;
-        color: black;
-    }
-
-    /** blink start */
-    blink {
-        animation: blinker 0.6s linear infinite;
-        color: #1c87c9;
-    }
-
-    blink>span.m-badge {
-        min-width: 100px;
-    }
-
-    @keyframes blinker {
-        50% {
-            opacity: 0;
-        }
-    }
-
-    .blink-one {
-        animation: blinker-one 1s linear infinite;
-    }
-
-    @keyframes blinker-one {
-        0% {
-            opacity: 0;
-        }
-    }
-
-    .blink-two {
-        animation: blinker-two 1.4s linear infinite;
-    }
-
-    @keyframes blinker-two {
-        100% {
-            opacity: 0;
-        }
-    }
-
-
-    /** blink end */
 </style>
 @endsection
 @section('content')
@@ -129,7 +85,7 @@
             </ul>
         </div>
         <div>
-            {{--<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+            <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
                 data-dropdown-toggle="hover" aria-expanded="true">
                 <a href="#"
                     class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
@@ -190,7 +146,7 @@
                         </div>
                     </div>
                 </div>
-            </div>--}}
+            </div>
         </div>
     </div>
 </div>
@@ -219,114 +175,52 @@
                         <div class="row align-items-center">
                             <div class="col-xl-12 order-2 order-xl-1">
                                 <div class="form-group m-form__group row align-items-center">
+                                    <div class="col-md-2">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__control">
+                                                <input type="text" class="form-control m-input" placeholder="ID..."
+                                                    id="m_form_id">
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
 
                                     <div class="col-md-2">
                                         <div class="m-form__group m-form__group--inline">
                                             <div class="m-form__control">
-                                                <select class="form-control m-select" id="m_form_company_id">
-                                                    <option value=''>- Select Company -</option>
-                                                    @foreach ($medicine_company as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->company_name }}
+                                                <input type="text" class="form-control m-input" placeholder="Invoice..."
+                                                    id="m_form_invoice">
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label>
+                                                    Status:
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <select class="form-control m-bootstrap-select" id="m_form_status">
+                                                    <option value="">
+                                                        All
                                                     </option>
-                                                    @endforeach
+                                                    <option value="PENDING">
+                                                        PENDING
+                                                    </option>
+                                                    <option value="COMPLETE">
+                                                        COMPLETE
+                                                    </option>
+                                                    <option value="HOLD">
+                                                        HOLD
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="d-md-none m--margin-bottom-10"></div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="Medicine Name" name="medicine_name" id="medicine_name">
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="Pharmacy Name" id="m_form_pharmacy">
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="Pharmacy Licence No" id="m_form_pharmacy_licence_no">
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <input type="text" class="form-control m-input" placeholder="City Name"
-                                                    id="m_form_branch_city">
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <input type="text" class="form-control m-input" placeholder="Area Name"
-                                                    id="m_form_branch_area">
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="m-form__group m-form__group--inline">
-                                            <div class="m-form__control">
-                                                <select class="form-control m-select" id="m_form_exp_type">
-                                                    <option value=''>- Exp Type -</option>
-                                                    <option value="1">OK</option>
-                                                    <option style="background-color: orange" value="2">Expired in 1
-                                                        Month</option>
-                                                    <option style="background-color: yellow;" value="3">Expired in 3
-                                                        Month</option>
-                                                    <option style="background-color: red" value="4">Expired</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="d-md-none m--margin-bottom-10"></div>
-                                    </div>
-
-                                    {{--<div class="col-md-2">
-                                            <div class="m-form__group m-form__group--inline">
-                                                <div class="m-form__label">
-                                                    <label>
-                                                        Status:
-                                                    </label>
-                                                </div>
-                                                <div class="m-form__control">
-                                                    <select class="form-control m-bootstrap-select" id="m_form_status">
-                                                        <option value="">
-                                                            All
-                                                        </option>
-                                                        <option value="PENDING">
-                                                            PENDING
-                                                        </option>
-                                                        <option value="COMPLETE">
-                                                            COMPLETE
-                                                        </option>
-                                                        <option value="HOLD">
-                                                            HOLD
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="d-md-none m--margin-bottom-10"></div>
-                                        </div>--}}
 
                                     <div class="col-md-2">
                                         <button class="btn btn-info">Search</button>
