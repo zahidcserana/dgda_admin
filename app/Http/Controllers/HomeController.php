@@ -85,4 +85,11 @@ class HomeController extends Controller
         }
         
     }
+
+    public function companyScript(){
+        $items = OrderItem::all();
+        foreach($items as $item){
+           $order = Order::find($item->order_id)->update(['company_id'=>$item->company_id]);
+        }
+    }
 }

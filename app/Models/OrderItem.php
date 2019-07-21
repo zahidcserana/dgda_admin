@@ -13,6 +13,8 @@ class OrderItem extends Model
         'sub_total', 'discount'
     ];
 
+    protected $guard = [];
+
     public function addItem($orderId, $cartId)
     {
         $cartItemModel = new CartItem();

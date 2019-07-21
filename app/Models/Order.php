@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
+      protected $fillable = [
+        'medicine_id', 'company_id', 'quantity', 'order_id', 'exp_date', 'mfg_date', 'batch_no', 'dar_no', 'unit_price',
+        'sub_total', 'discount'
+    ];
+    
     public function makeOrder($data)
     {
         $cartModel = new Cart();
