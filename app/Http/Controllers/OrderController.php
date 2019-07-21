@@ -82,11 +82,93 @@ class OrderController extends Controller
                 </div>
 					';
             }
-
         }
         $data['orders'] = $orders;
 
         echo json_encode($orders);
+    }
+
+    /**
+     * Invoice
+     *
+     * @return void
+     */
+    public function invoices()
+    {
+        $data = array();
+        $data['title'] = 'Order';
+
+        return view('invoices.index', $data);
+    }
+
+    /**
+     * Ajax request for listing
+     * @param Request $request
+     */
+    public function invoiceList(Request $request)
+    {
+        $user = Auth::user();
+        $userType = $user->user_type ?? 'DGDA';
+        $query = $request->query('query');
+
+        $conditions = array();
+
+        if (isset($query['invoice']) && !empty($query['invoice'])) {
+            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
+        }
+        if (isset($query['status']) && !empty($query['status'])) {
+            $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
+        }
+        if (isset($query['mobile']) && !empty($query['mobile'])) {
+            $conditions = array_merge(array(['mobile', 'LIKE', '%' . $query['mobile'] . '%']), $conditions);
+        }
+        if (isset($query['id']) && !empty($query['id'])) {
+            $conditions = array_merge(array('id' => $query['id']), $conditions);
+        }
+        $orders = Order::where($conditions)
+        ->orderBy('id', 'desc')
+        ->get();
+       
+            $data = array();
+        foreach ($orders as $order) {
+            $aData = array();
+            $aData['invoice'] = $order->company_invoice;
+            $aData['created_at'] =  date("d F, Y", strtotime($order->created_at));
+            $pharmacyBranch = $order->PharmacyBranch;
+
+            $aData['pharmacy_branch'] = $pharmacyBranch->branch_name;
+            $aData['status'] = $order->status;
+            $order->order_id = '<a href="/orders/' . $order->id . '">' . $order->id . '</a>';
+            $orderId = $order->id;
+            $aData['actions'] = '
+               <div class="btn">
+                  <a href="/invoices/' . $orderId . '">Details</a>
+                </div>
+                    ';
+                    
+            $data[] = $aData;
+        }
+
+        echo json_encode($data);
+    }
+
+    /**
+     * Invoice details
+     * @param $id
+     * @return order
+     */
+    public function invoiceDetails($id)
+    {
+        $orderModel = new Order();
+
+        $order = $orderModel::findOrFail($id);
+
+        if (empty($order)) {
+            return redirect()->route('orders');
+        }
+        $order = $orderModel->getOrderDetails($id);
+        $data['order'] = $order;
+        return view('invoices.view', $data);
     }
 
     public function orderItems()
@@ -99,14 +181,16 @@ class OrderController extends Controller
         return view('orders.item_list', $data);
     }
 
-    public function companyView(){
+    public function companyView()
+    {
         $data = array();
         $data['title'] = 'Company';
 
         return view('orders.company_list', $data);
     }
 
-    public function medicineView(){
+    public function medicineView()
+    {
         $data = array();
         $data['title'] = 'Medicine';
 
@@ -114,24 +198,26 @@ class OrderController extends Controller
     }
 
     //for Ajax Call
-    public function companyList(){
+    public function companyList()
+    {
         $companies = DB::table('order_items')->select('company_id', DB::raw('count(*) as total'))->groupBy('company_id')->get();
         $company_lists = [];
-        foreach($companies as $company):
+        foreach ($companies as $company) :
             $company_info = DB::table('medicine_companies')->where('id', $company->company_id)->get();
-            if(count($company_info)){
+            if (count($company_info)) {
                 $company_lists[] = $company_info[0];
             }
         endforeach;
         echo json_encode($company_lists);
     }
 
-    public function medicineList(){
+    public function medicineList()
+    {
         $medicine = DB::table('order_items')->select('medicine_id', DB::raw('count(*) as total'))->groupBy('medicine_id')->get();
         $medicine_lists = [];
-        foreach($medicine as $item):
+        foreach ($medicine as $item) :
             $medicine_info = DB::table('medicines')->where('id', $item->medicine_id)->get();
-            if(count($medicine_info)){
+            if (count($medicine_info)) {
                 $medicine_lists[] = $medicine_info[0];
             }
         endforeach;
@@ -142,7 +228,7 @@ class OrderController extends Controller
     {
         $query = Order::where($where);
         $orders = $query
-//            ->orderBy('id', 'desc')
+            //            ->orderBy('id', 'desc')
             ->get();
         $orderData = array();
         foreach ($orders as $order) {
@@ -171,7 +257,6 @@ class OrderController extends Controller
 
                 $orderData[] = $aData;
             }
-
         }
 
         return $orderData;
@@ -200,8 +285,8 @@ class OrderController extends Controller
         $query = $request->query('query');
 
         $pageNo = $request->query('page_no') ?? 1;
-       // $limit = $request->query('limit') ?? 100;
-       // $offset = (($pageNo - 1) * $limit);
+        // $limit = $request->query('limit') ?? 100;
+        // $offset = (($pageNo - 1) * $limit);
         $where = array();
         $where = array_merge(array(['orders.is_manual', true]), $where);
 
@@ -210,7 +295,10 @@ class OrderController extends Controller
             $where = array_merge(array(['pharmacies.pharmacy_shop_licence_no', 'LIKE', '%' . $query['pharmacy_licence_no'] . '%']), $where);
         }
         if (!empty($query['pharmacy'])) {
-             $where = array_merge(array(['pharmacy_branches.branch_name', 'LIKE', '%' . $query['pharmacy'] . '%']), $where);
+            $where = array_merge(array(['pharmacy_branches.branch_name', 'LIKE', '%' . $query['pharmacy'] . '%']), $where);
+        }
+        if (!empty($query['company_id'])) {
+            $where = array_merge(array(['order_items.company_id', $query['company_id']]), $where);
         }
         if (!empty($query['batch_no'])) {
             $where = array_merge(array(['order_items.batch_no', 'LIKE', '%' . $query['batch_no'] . '%']), $where);
@@ -229,18 +317,19 @@ class OrderController extends Controller
         }
         if (!empty($query['company_id'])) {
             $company_id = $query['company_id'];
-        }else{
+        } else {
             $company_id = 0;
         }
 
         $query = Order::where($where)
-            ->when($company_id, function ($dbquery) use ($company_id) {
-                return $dbquery->where('orders.company_id', $company_id);
-            })
+            // ->when($company_id, function ($dbquery) use ($company_id) {
+            //     return $dbquery->where('orders.company_id', $company_id);
+            // })
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->join('medicines', 'order_items.medicine_id', '=', 'medicines.id')
             ->join('pharmacy_branches', 'orders.pharmacy_branch_id', '=', 'pharmacy_branches.id')
             ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
+            
         $total = $query->count();
         $orders = $query
             //->offset($offset)
@@ -257,7 +346,7 @@ class OrderController extends Controller
             $company = MedicineCompany::findOrFail($item->company_id);
             $aData['company'] = $company->company_name;
 
-            $aData['pharmacy_branch'] = $item->branch_name;
+            $aData['pharmacy_branch'] = $item->branch_name .'<br>(LN# '.$item->pharmacy_shop_licence_no.')';
             $aData['pharmacy_licence_no'] = $item->pharmacy_shop_licence_no;
 
             $aData['company_invoice'] = $item->company_invoice;
@@ -274,14 +363,13 @@ class OrderController extends Controller
             $aData['status'] = $item->status;
 
             $orderData[] = $aData;
-
         }
 
         $data = array(
             'total' => $total,
             'data' => $orderData,
             'page_no' => $pageNo,
-           // 'limit' => $limit,
+            // 'limit' => $limit,
         );
         echo json_encode($orderData);
     }
@@ -394,5 +482,4 @@ class OrderController extends Controller
     {
         return redirect()->route('orders');
     }
-
 }

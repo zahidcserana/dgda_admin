@@ -49,6 +49,11 @@ Route::get('/orders/{id}/details', 'OrderController@details')->name('order_detai
 Route::post('/orders/{id}', 'OrderController@edit')->name('order_edit')->middleware('auth');
 Route::get('/orders/{id}/delete', 'OrderController@delete')->name('order_delete')->middleware('auth');
 
+/** invoices */
+Route::get('/invoices', 'OrderController@invoices')->name('invoices')->middleware('auth');
+Route::get('/invoices/list', 'OrderController@invoiceList')->name('invoice_list');   // ajax
+Route::get('/invoices/{id}', 'OrderController@invoiceDetails')->name('invoice_details')->middleware('auth');
+
 /** Company */
 Route::get('/company/list', 'OrderController@companyList');   // ajax
 Route::get('/company/lists', 'OrderController@companyView')->name('company_list')->middleware('auth');
