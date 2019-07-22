@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $pharmacy = DB::table('pharmacy_branches')->count();
-        $order = DB::table('orders')->select('company_invoice')->distinct()->get()->count();
+        $order = DB::table('orders')->count();
         $company = DB::table('order_items')->select('company_id')->distinct()->get()->count();
         $medicine = DB::table('order_items')->select('medicine_id')->distinct()->get()->count();
         $entry = DB::table('order_items')->count();
