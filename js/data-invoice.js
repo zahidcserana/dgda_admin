@@ -61,6 +61,9 @@ var DatatableRemoteAjaxDemo = function () {
                     field: 'invoice',
                     title: 'Invoice',
                 }, {
+                    field: 'company',
+                    title: 'Company',
+                }, {
                     field: 'created_at',
                     title: 'Date',
                     type: 'date',
@@ -105,6 +108,12 @@ var DatatableRemoteAjaxDemo = function () {
 
         $('#m_form_status').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'status');
+        });
+        $('#m_form_pharmacy_id').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'pharmacy_id');
+        });
+        $('#m_form_company_id').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'company_id');
         });
 
         $('#m_form_invoice').on('change', function () {

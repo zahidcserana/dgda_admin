@@ -178,8 +178,13 @@
                                     <div class="col-md-2">
                                         <div class="m-form__group m-form__group--inline">
                                             <div class="m-form__control">
-                                                <input type="text" class="form-control m-input" placeholder="ID..."
-                                                    id="m_form_id">
+                                                <select class="form-control m-select" id="m_form_company_id">
+                                                    <option value=''>- Select Company -</option>
+                                                    @foreach ($medicine_company as $company)
+                                                    <option value="{{ $company->id }}">{{ $company->company_name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="d-md-none m--margin-bottom-10"></div>
@@ -199,23 +204,16 @@
                                         <div class="m-form__group m-form__group--inline">
                                             <div class="m-form__label">
                                                 <label>
-                                                    Status:
+                                                    Pharmacy:
                                                 </label>
                                             </div>
                                             <div class="m-form__control">
-                                                <select class="form-control m-bootstrap-select" id="m_form_status">
-                                                    <option value="">
-                                                        All
+                                                <select class="form-control m-select" id="m_form_pharmacy_id">
+                                                    <option value=''>- Select Pharmacy -</option>
+                                                    @foreach ($pharmacy as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->branch_name }}
                                                     </option>
-                                                    <option value="PENDING">
-                                                        PENDING
-                                                    </option>
-                                                    <option value="COMPLETE">
-                                                        COMPLETE
-                                                    </option>
-                                                    <option value="HOLD">
-                                                        HOLD
-                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
