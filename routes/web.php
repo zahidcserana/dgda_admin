@@ -75,4 +75,5 @@ Route::get('/user-delete/{id}', 'UsersController@delete')->name('user-delete');
 Route::get('/orderRepair', 'HomeController@orderRepair');
 Route::get('/getExtraItem', 'HomeController@getExtraItem');
 Route::get('/companyScript', 'HomeController@companyScript');
+Route::get('/createdDate', 'HomeController@createdDate');
 

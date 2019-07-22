@@ -92,4 +92,24 @@ class HomeController extends Controller
            $order = Order::find($item->order_id)->update(['company_id'=>$item->company_id]);
         }
     }
+
+    public function createdDate(){
+        $orders = Order::all();
+      
+        foreach($orders as $order){
+            $orderPrev = DB::table('orders_prev')->where('id',$order->id)->first();
+            
+            if(empty($orderPrev)){
+                $date = '2019-07-18 00:00:00';
+            }else{
+                $date = $orderPrev->created_at;
+            }
+
+            DB::table('orders')
+            ->where('id', $order->id)
+            ->update(['created_at'=>$date]);
+      
+        }
+        
+    }
 }
