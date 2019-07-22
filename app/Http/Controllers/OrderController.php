@@ -42,7 +42,7 @@ class OrderController extends Controller
         $conditions = array();
 
         if (isset($query['invoice']) && !empty($query['invoice'])) {
-            $conditions = array_merge(array(['invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
+            $conditions = array_merge(array(['company_invoice', 'LIKE', '%' . $query['invoice'] . '%']), $conditions);
         }
         if (isset($query['status']) && !empty($query['status'])) {
             $conditions = array_merge(array(['status', 'LIKE', '%' . $query['status'] . '%']), $conditions);
@@ -98,6 +98,9 @@ class OrderController extends Controller
         $data = array();
         $data['title'] = 'Order';
 
+        $data['pharmacy'] = DB::table('pharmacy_branches')->get();
+       // dd($data['pharmacy']);
+
         return view('invoices.index', $data);
     }
 
@@ -124,6 +127,9 @@ class OrderController extends Controller
         }
         if (isset($query['id']) && !empty($query['id'])) {
             $conditions = array_merge(array('id' => $query['id']), $conditions);
+        }
+        if (isset($query['pharmacy_id']) && !empty($query['pharmacy_id'])) {
+            $conditions = array_merge(array('pharmacy_branch_id' => $query['pharmacy_id']), $conditions);
         }
         $orders = Order::where($conditions)
         ->orderBy('id', 'desc')
