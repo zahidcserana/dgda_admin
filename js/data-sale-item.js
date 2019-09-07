@@ -10,7 +10,7 @@ var DatatableRemoteAjaxDemo = function () {
                     read: {
                         // sample GET method
                         method: 'GET',
-                        url: "/orders/item-list",
+                        url: "/sales/item-list",
                         map: function (raw) {
                             // sample data mapping
                             var dataSet = raw;
@@ -58,7 +58,7 @@ var DatatableRemoteAjaxDemo = function () {
                 field: 'pharmacy_branch',
                 title: 'Pharmacy',
             }, {
-                field: 'company_invoice',
+                field: 'invoice',
                 title: 'Invoice',
             }, {
                 field: 'medicine',
@@ -70,37 +70,16 @@ var DatatableRemoteAjaxDemo = function () {
                 field: 'batch_no',
                 title: 'Batch No',
             }, {
-                field: 'quantity',
-                title: 'Quantity',
-            }, {
                 field: 'exp_date',
                 title: 'EXP Date',
             }, {
-                field: 'status',
-                title: 'Status',
-                // callback function support for column rendering
-                template: function (row) {
-                    var status = {
-                        'RETURNED': {
-                            'title': 'RETURNED',
-                            'class': 'm-badge--brand'
-                        },
-                        'SOLD': {
-                            'title': 'SOLD',
-                            'class': 'm-badge  m-badge--danger m-badge--wide'
-                        },
-                        'REMOVED': {
-                            'title': 'REMOVED',
-                            'class': 'm-badge--brand'
-                        },
-                        'OK': {
-                            'title': 'OK',
-                            'class': 'm-badge  m-badge--metal m-badge--wide'
-                        },
-                    };
-                    return '<span class="m-badge ' + status[row.status].class + ' m-badge--wide">' + status[row.status].title + '</span>';
+                field: 'file_name',
+                title: 'Prescription',
+                template: function (data) {
+                    return '<a  target="_blank" href="'+data.file_name+'">show</a>';
                 },
-            }, ],
+            },
+            ],
         });
 
         $('#m_form_exp_type').on('change', function () {
