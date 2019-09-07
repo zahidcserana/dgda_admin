@@ -115,7 +115,7 @@ class SaleController extends Controller
       if ($data['file'] && !file_exists($dir = 'assets/prescription_image/'. $data['file_name']))
       {
           $picture   = base64_decode($data['file']);
-          $dir = 'uploads'. $data['file_name'];
+          $dir = 'uploads/'. $data['file_name'];
           file_put_contents($dir, $picture);
       }
     }
