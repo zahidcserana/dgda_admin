@@ -39,6 +39,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', 'HomeController@index')->name('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/** Sales */
+Route::get('/sales/item-list', 'SaleController@itemList')->name('sale_item_list'); // ajax
+Route::get('/sales/items', 'SaleController@saleItems')->name('sale_items')->middleware('auth');
+
 /** Orders */
 Route::get('/orders', 'OrderController@index')->name('orders')->middleware('auth');
 Route::get('/orders/list', 'OrderController@orderList')->name('order_list');   // ajax

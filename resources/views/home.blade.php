@@ -143,7 +143,26 @@
                     </div>
                     <div class="m--space-30"></div>
                 </div>
-
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <div class="m-portlet m-portlet--half-height m-portlet--border-bottom-focus ">
+                        <div class="m-portlet__body">
+                            <a href="{{route('sale_items')}}">
+                                <div class="m-widget26">
+                                    <div class="m-widget26__number">
+                                        {{$total_sale_item}}
+                                        <small>
+                                            Total Antibiotics
+                                        </small>
+                                    </div>
+                                    <div class="m-widget26__chart" style="height:90px; width: 220px;">
+                                        {{--<canvas id="m_chart_quick_stats_3"></canvas>--}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m--space-30"></div>
+                </div>
             </div>
             <!--end:: Widgets/Quick Stats-->
         </div>
