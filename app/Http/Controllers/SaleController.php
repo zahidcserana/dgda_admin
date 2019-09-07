@@ -79,7 +79,7 @@ class SaleController extends Controller
             $aData = array();
             $aData['id'] = $item->id;
             $aData['sale_id'] = $item->sale_id;
-            $aData['file_name'] = empty($item->file_name) == true ? '' : '/assets/prescription_image/' . $item->file_name;
+            $aData['file_name'] = empty($item->file_name) == true ? '' : '/uploads/' . $item->file_name;
 
             $company = MedicineCompany::findOrFail($item->company_id);
             $aData['company'] = $company->company_name;
@@ -115,7 +115,7 @@ class SaleController extends Controller
       if ($data['file'] && !file_exists($dir = 'assets/prescription_image/'. $data['file_name']))
       {
           $picture   = base64_decode($data['file']);
-          $dir = 'assets/prescription_image/'. $data['file_name'];
+          $dir = 'uploads'. $data['file_name'];
           file_put_contents($dir, $picture);
       }
     }
