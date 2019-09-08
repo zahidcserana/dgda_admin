@@ -98,7 +98,7 @@
     <div class="d-flex align-items-center">
         <div class="mr-auto">
             <h3 class="m-subheader__title m-subheader__title--separator">
-                Order List
+                {{ $title }}
             </h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
@@ -110,9 +110,9 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{route('orders')}}" class="m-nav__link">
+                    <a href="{{route('sale_items')}}" class="m-nav__link">
                         <span class="m-nav__link-text">
-                            Orders
+                            Sales
                         </span>
                     </a>
                 </li>
@@ -120,7 +120,7 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{route('orders')}}" class="m-nav__link">
+                    <a href="{{route('home')}}" class="m-nav__link">
                         <span class="m-nav__link-text">
                             Back
                         </span>

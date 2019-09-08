@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 .env
+/assets/prescription_image/*
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

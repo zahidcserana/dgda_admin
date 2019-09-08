@@ -13,7 +13,7 @@ class SaleController extends Controller
     public function saleItems()
     {
         $data = array();
-        $data['title'] = 'Sale';
+        $data['title'] = 'Sale List';
         $medicine_company = DB::table('medicine_companies')->orderBy('company_name', 'ASC')->get();
         $data['medicine_company'] = $medicine_company;
 

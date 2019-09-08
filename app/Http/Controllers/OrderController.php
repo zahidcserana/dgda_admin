@@ -134,7 +134,7 @@ class OrderController extends Controller
         $orders = Order::where($conditions)
         ->orderBy('id', 'desc')
         ->get();
-       
+
             $data = array();
         foreach ($orders as $order) {
             $aData = array();
@@ -151,7 +151,7 @@ class OrderController extends Controller
                   <a href="/invoices/' . $orderId . '">Details</a>
                 </div>
                     ';
-                    
+
             $data[] = $aData;
         }
 
@@ -210,7 +210,7 @@ class OrderController extends Controller
         $company_lists = [];
         foreach ($companies as $company) :
             $company_info = DB::table('medicine_companies')->where('id', $company->company_id)->get();
-            if (count($company_info)) {
+            if (sizeof($company_info)) {
                 $company_lists[] = $company_info[0];
             }
         endforeach;
@@ -223,7 +223,7 @@ class OrderController extends Controller
         $medicine_lists = [];
         foreach ($medicine as $item) :
             $medicine_info = DB::table('medicines')->where('id', $item->medicine_id)->get();
-            if (count($medicine_info)) {
+            if (sizeof($medicine_info)) {
                 $medicine_lists[] = $medicine_info[0];
             }
         endforeach;
@@ -335,9 +335,9 @@ class OrderController extends Controller
             ->join('medicines', 'order_items.medicine_id', '=', 'medicines.id')
             ->join('pharmacy_branches', 'orders.pharmacy_branch_id', '=', 'pharmacy_branches.id')
             ->join('pharmacies', 'orders.pharmacy_id', '=', 'pharmacies.id');
-            
+
         $total = $query->count();
-       
+
         $orders = $query
             //->offset($offset)
             //->limit($limit)
