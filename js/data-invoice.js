@@ -21,7 +21,7 @@ var DatatableRemoteAjaxDemo = function () {
                         },
                     },
                 },
-                pageSize: 10,
+                pageSize: 500,
                 serverPaging: true,
                 serverFiltering: true,
                 serverSorting: true,
@@ -44,7 +44,7 @@ var DatatableRemoteAjaxDemo = function () {
                     // pagination
                     pagination: {
                         // page size select
-                        pageSizeSelect: [10, 20, 30, 50, 100],
+                        pageSizeSelect: [10, 20, 30, 50, 100, 500],
                     },
                 },
             },
